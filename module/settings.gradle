@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "FaceRecognitionModule"
 include ':app'
+include ':facerecognitionlibrary'
+include ':sdk'
