@@ -33,16 +33,22 @@ class FaceRecognitionLibrary {
         val py = Python.getInstance()
         val myscript = py.getModule("myscript")
         val obj = myscript.callAttr("main")
-        Log.d("mylog", "파이썬 코드 호출 성공")
+        Log.d("mylog", "myscript.py 코드 호출 성공")
     }
 
-    fun recognizeFace(context: Context, image: Bitmap) {
+    fun recognizeFace(context: Context, byteArr: ByteArray) {
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(context))
             Log.d("mylog", "Python start success")
         }
 
-        val byteArray: ByteArray = bitmapToByteArray(image)
+        val py = Python.getInstance()
+        val myscript = py.getModule("recognizeFace")
+        val bytesObj = py.builtins.callAttr("bytes", byteArr)
+        val obj = myscript.callAttr("main", bytesObj)
+        Log.d("mylog", "recognizeFace.py 코드 호출 성공")
+
+//        val byteArray: ByteArray = bitmapToByteArray(image)
 
     }
 

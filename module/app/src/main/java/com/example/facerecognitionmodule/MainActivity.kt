@@ -1,6 +1,7 @@
 package com.example.facerecognitionmodule
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.*
 import android.net.Uri
 import android.os.Bundle
@@ -36,6 +37,13 @@ import android.graphics.Bitmap.Config.RGB_565
 import java.io.ByteArrayOutputStream
 
 import androidx.camera.*
+import androidx.core.content.ContentProviderCompat.requireContext
+import org.opencv.android.OpenCVLoader
+import org.opencv.core.CvType
+import org.opencv.core.Mat
+import org.opencv.core.MatOfRect
+import java.io.FileOutputStream
+import org.opencv.core.Point
 
 class MainActivity : AppCompatActivity() {
     // ViewBinding
@@ -86,9 +94,12 @@ class MainActivity : AppCompatActivity() {
 
         /* image 변환 테스트 */
 //        val libTest = FaceRecognitionLibrary()
-//        val image: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.face1)
+//        val image: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.dohun001)
 //        val byteArr: ByteArray = libTest.bitmapToByteArray(image)
 //        Log.d("mylog", "byteArr를 생성했습니다.")
+//
+//        libTest.recognizeFace(this, byteArr)
+
 //        val bitmapFromByteArray: Bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
 //        Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
 
@@ -140,6 +151,8 @@ class MainActivity : AppCompatActivity() {
                 // Image 처리 코드 작성
                 Log.d("CameraX-Debug", "analyze: got the frame at: " + image.imageInfo.timestamp)
 
+                val format = image.format // 35(YUV_420_888)
+
 //                val buffer = image.planes[0].buffer
 //                val bytes = ByteArray(buffer.capacity())
 //                Log.d("CameraX-Debug", "Buffer remaining: ${buffer.remaining()}")
@@ -177,7 +190,6 @@ class MainActivity : AppCompatActivity() {
                 val imageBytes = out.toByteArray()
                 val bmp = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
-
                 if (bmp == null) {
                     Log.e(
                         "CameraX-Debug", "Failed to decode byte array into a Bitmap. " +
@@ -187,28 +199,134 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
 
-                if (bmp != null) {
-                    // 이미지를 grayscale로 변환
-                    val grayBitmap =
-                        Bitmap.createBitmap(bmp.width, bmp.height, Bitmap.Config.ARGB_8888)
-                    val canvas = Canvas(grayBitmap)
-                    val paint = Paint()
-                    val cm = ColorMatrix(
-                        floatArrayOf(
-                            0.33f, 0.33f, 0.33f, 0f, 0f,
-                            0.33f, 0.33f, 0.33f, 0f, 0f,
-                            0.33f, 0.33f, 0.33f, 0f, 0f,
-                            0f, 0f, 0f, 1f, 0f
-                        )
-                    )
-                    paint.colorFilter = ColorMatrixColorFilter(cm)
-                    canvas.drawBitmap(bmp, 0f, 0f, paint)
+                OpenCVLoader.initDebug();
 
-                    // grayscale 이미지를 grayView에 적용
-                    runOnUiThread {
-                        binding.grayView.setImageBitmap(grayBitmap)
-                    }
+                // Create Mat object
+                val yuvMat = Mat(image.height + image.height / 2, image.width, CvType.CV_8UC1)
+                yuvMat.put(0, 0, nv21)
+
+                // Convert YUV to RGB
+                val rgbMat = Mat(image.height, image.width, CvType.CV_8UC3)
+                Imgproc.cvtColor(yuvMat, rgbMat, Imgproc.COLOR_YUV2RGB_NV21)
+
+                // Convert Mat to Bitmap
+                val bmp2 = Bitmap.createBitmap(rgbMat.cols(), rgbMat.rows(), Bitmap.Config.ARGB_8888)
+                Utils.matToBitmap(rgbMat, bmp2)
+
+                // *회전 방향 확인
+                val display = windowManager.defaultDisplay
+                val rotation = display.rotation
+                Log.d("myLog", "Device orientation: $rotation")
+
+                // rotate image
+//                val bmpMat = Mat()
+//                Utils.bitmapToMat(bmp2, bmpMat)
+//
+//                // 회전 매트릭스 생성
+//                val center = Point(bmp2.width / 2.0, bmp2.height / 2.0)
+//                val angle = 90.0
+//                val scale = 1.0
+//                val rotationMatrix = Imgproc.getRotationMatrix2D(center, angle, scale)
+//
+//                // 이미지 회전
+//                val rotatedMat = Mat()
+//                Imgproc.warpAffine(bmpMat, rotatedMat, rotationMatrix, bmpMat.size())
+//
+//                // 회전된 이미지를 다시 Bitmap으로 변환하여 적용
+//                Utils.matToBitmap(rotatedMat, bmp2)
+
+                // Load cascade classifier file
+                val cascadeFile = File(applicationContext.cacheDir, "haarcascade_frontalface_alt.xml")
+                val inputStream = resources.openRawResource(R.raw.haarcascade_frontalface_alt)
+                val outputStream = FileOutputStream(cascadeFile)
+
+                // 파일 복사
+                val buffer = ByteArray(4096)
+                var bytesRead: Int
+                while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                    outputStream.write(buffer, 0, bytesRead)
                 }
+
+                // 파일 로드
+                val cascadeClassifier = CascadeClassifier(cascadeFile.absolutePath)
+
+                // grayscale 매트릭스로 변환
+                val grayMat = Mat()
+                Imgproc.cvtColor(rgbMat, grayMat, Imgproc.COLOR_RGB2GRAY)
+                val graybmp = Bitmap.createBitmap(grayMat.cols(), grayMat.rows(), Bitmap.Config.ARGB_8888)
+                Utils.matToBitmap(grayMat, graybmp)
+
+
+
+
+//                val bmpMat = Mat()
+//                Utils.bitmapToMat(graybmp, bmpMat)
+//
+//                // 회전 매트릭스 생성
+//                val center = Point(graybmp.width / 2.0, graybmp.height / 2.0)
+//                val angle = 180.0
+//                val scale = 1.0
+//                val rotationMatrix = Imgproc.getRotationMatrix2D(center, angle, scale)
+//
+//                // 이미지 회전
+//                val rotatedMat = Mat()
+//                Imgproc.warpAffine(bmpMat, rotatedMat, rotationMatrix, bmpMat.size())
+//
+//                // 회전된 이미지를 다시 Bitmap으로 변환하여 적용
+//                Utils.matToBitmap(rotatedMat, graybmp)
+
+
+
+
+
+                // Detect faces
+                val faces = MatOfRect()
+//                cascadeClassifier.detectMultiScale(rgbMat, faces)
+                cascadeClassifier.detectMultiScale(grayMat, faces)
+
+                val numFaces = faces.toArray().size
+//                Log.d("myLog", "Number of detected faces: $numFaces")
+
+                // Draw rectangles on bitmap for detected faces
+                val canvas = Canvas(graybmp)
+                faces.toList().forEach { face ->
+                    val rect = Rect(face.x, face.y, face.x + face.width, face.y + face.height)
+                    canvas.drawRect(rect, Paint().apply {
+                        color = Color.RED
+                        strokeWidth = 5f
+                        style = Paint.Style.STROKE
+                    })
+                }
+
+                // Display the bitmap or do further processing with it
+                runOnUiThread {
+                    binding.grayView.setImageBitmap(graybmp)
+                }
+
+
+
+//                if (bmp != null) {
+//                    // 이미지를 grayscale로 변환
+//                    val grayBitmap =
+//                        Bitmap.createBitmap(bmp.width, bmp.height, Bitmap.Config.ARGB_8888)
+//                    val canvas = Canvas(grayBitmap)
+//                    val paint = Paint()
+//                    val cm = ColorMatrix(
+//                        floatArrayOf(
+//                            0.33f, 0.33f, 0.33f, 0f, 0f,
+//                            0.33f, 0.33f, 0.33f, 0f, 0f,
+//                            0.33f, 0.33f, 0.33f, 0f, 0f,
+//                            0f, 0f, 0f, 1f, 0f
+//                        )
+//                    )
+//                    paint.colorFilter = ColorMatrixColorFilter(cm)
+//                    canvas.drawBitmap(bmp, 0f, 0f, paint)
+//
+//                    // grayscale 이미지를 grayView에 적용
+//                    runOnUiThread {
+//                        binding.grayView.setImageBitmap(grayBitmap)
+//                    }
+//                }
 
                 image.close()
 

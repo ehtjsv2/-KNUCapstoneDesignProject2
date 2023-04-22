@@ -24,6 +24,8 @@ android {
                 install "numpy"
                 install "face_recognition"
                 install "opencv-python"
+                install "pillow"
+                install "matplotlib"
             }
         }
     }
