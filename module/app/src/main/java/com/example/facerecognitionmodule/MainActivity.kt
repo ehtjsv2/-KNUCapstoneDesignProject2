@@ -2,6 +2,7 @@ package com.example.facerecognitionmodule
 
 import android.app.Activity
 import android.content.Context
+import android.database.Observable
 import android.graphics.*
 import android.net.Uri
 import android.os.Bundle
@@ -57,6 +58,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var imageAnalysis: ImageAnalysis
 
+    private lateinit var byteArr: ByteArray
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_main)
@@ -93,12 +97,12 @@ class MainActivity : AppCompatActivity() {
 //        test.chaquopyTest(this)
 
         /* image 변환 테스트 */
-//        val libTest = FaceRecognitionLibrary()
-//        val image: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.dohun001)
-//        val byteArr: ByteArray = libTest.bitmapToByteArray(image)
-//        Log.d("mylog", "byteArr를 생성했습니다.")
-//
-//        libTest.recognizeFace(this, byteArr)
+        val libTest = FaceRecognitionLibrary()
+        val image: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.dohun006)
+        byteArr = libTest.bitmapToByteArray(image)
+        Log.d("mylog", "byteArr를 생성했습니다.")
+
+        libTest.recognizeFace(this, byteArr)
 
 //        val bitmapFromByteArray: Bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
 //        Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
@@ -129,15 +133,27 @@ class MainActivity : AppCompatActivity() {
             outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
+
                 override fun onError(exc: ImageCaptureException) {
-                    Log.d("CameraX-Debug", "Photo capture failed: ${exc.message}", exc)
+                    Log.d("myLog", "Photo capture failed: ${exc.message}", exc)
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
+
                     val msg = "Photo capture succeeded: $savedUri"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
-                    Log.d("CameraX-Debug", msg)
+                    Log.d("myLog", msg)
+
+                    val bitmap = BitmapFactory.decodeFile(photoFile.absolutePath)
+                    val libTest = FaceRecognitionLibrary()
+                    byteArr = libTest.bitmapToByteArray(bitmap)
+                    Log.d("mylog", "byteArr를 생성했습니다.")
+                    val bitmapFromByteArray: Bitmap =
+                        BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
+//                    Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
+                    libTest.recognizeFace(baseContext, byteArr)
+
                 }
             })
     }
@@ -210,13 +226,14 @@ class MainActivity : AppCompatActivity() {
                 Imgproc.cvtColor(yuvMat, rgbMat, Imgproc.COLOR_YUV2RGB_NV21)
 
                 // Convert Mat to Bitmap
-                val bmp2 = Bitmap.createBitmap(rgbMat.cols(), rgbMat.rows(), Bitmap.Config.ARGB_8888)
+                val bmp2 =
+                    Bitmap.createBitmap(rgbMat.cols(), rgbMat.rows(), Bitmap.Config.ARGB_8888)
                 Utils.matToBitmap(rgbMat, bmp2)
 
                 // *회전 방향 확인
                 val display = windowManager.defaultDisplay
                 val rotation = display.rotation
-                Log.d("myLog", "Device orientation: $rotation")
+//                Log.d("myLog", "Device orientation: $rotation")
 
                 // rotate image
 //                val bmpMat = Mat()
@@ -236,7 +253,8 @@ class MainActivity : AppCompatActivity() {
 //                Utils.matToBitmap(rotatedMat, bmp2)
 
                 // Load cascade classifier file
-                val cascadeFile = File(applicationContext.cacheDir, "haarcascade_frontalface_alt.xml")
+                val cascadeFile =
+                    File(applicationContext.cacheDir, "haarcascade_frontalface_alt.xml")
                 val inputStream = resources.openRawResource(R.raw.haarcascade_frontalface_alt)
                 val outputStream = FileOutputStream(cascadeFile)
 
@@ -253,10 +271,9 @@ class MainActivity : AppCompatActivity() {
                 // grayscale 매트릭스로 변환
                 val grayMat = Mat()
                 Imgproc.cvtColor(rgbMat, grayMat, Imgproc.COLOR_RGB2GRAY)
-                val graybmp = Bitmap.createBitmap(grayMat.cols(), grayMat.rows(), Bitmap.Config.ARGB_8888)
+                val graybmp =
+                    Bitmap.createBitmap(grayMat.cols(), grayMat.rows(), Bitmap.Config.ARGB_8888)
                 Utils.matToBitmap(grayMat, graybmp)
-
-
 
 
 //                val bmpMat = Mat()
@@ -276,9 +293,6 @@ class MainActivity : AppCompatActivity() {
 //                Utils.matToBitmap(rotatedMat, graybmp)
 
 
-
-
-
                 // Detect faces
                 val faces = MatOfRect()
 //                cascadeClassifier.detectMultiScale(rgbMat, faces)
@@ -296,13 +310,14 @@ class MainActivity : AppCompatActivity() {
                         strokeWidth = 5f
                         style = Paint.Style.STROKE
                     })
+                    Log.d("myLog", "얼굴이 탐지되었습니다.")
+                    takePhoto()
                 }
 
                 // Display the bitmap or do further processing with it
                 runOnUiThread {
                     binding.grayView.setImageBitmap(graybmp)
                 }
-
 
 
 //                if (bmp != null) {

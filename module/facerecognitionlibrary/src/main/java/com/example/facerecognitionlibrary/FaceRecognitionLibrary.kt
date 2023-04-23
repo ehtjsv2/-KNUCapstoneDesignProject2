@@ -2,6 +2,7 @@ package com.example.facerecognitionlibrary
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.SurfaceTexture
 import android.util.Log
 import android.view.TextureView
@@ -42,10 +43,14 @@ class FaceRecognitionLibrary {
             Log.d("mylog", "Python start success")
         }
 
+        val bitmapFromByteArray: Bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
+//        Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
+
         val py = Python.getInstance()
         val myscript = py.getModule("recognizeFace")
         val bytesObj = py.builtins.callAttr("bytes", byteArr)
         val obj = myscript.callAttr("main", bytesObj)
+//        val obj = myscript.callAttr("main")
         Log.d("mylog", "recognizeFace.py 코드 호출 성공")
 
 //        val byteArray: ByteArray = bitmapToByteArray(image)
