@@ -52,6 +52,7 @@ class FaceRecognitionLibrary {
         val obj = myscript.callAttr("main", bytesObj)
 //        val obj = myscript.callAttr("main")
         Log.d("mylog", "recognizeFace.py 코드 호출 성공")
+        Log.d("myLog", "유클리드 거리: $obj")
 
 //        val byteArray: ByteArray = bitmapToByteArray(image)
 

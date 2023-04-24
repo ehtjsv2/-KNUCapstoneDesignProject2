@@ -59,6 +59,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var imageAnalysis: ImageAnalysis
 
     private lateinit var byteArr: ByteArray
+    private var isPhotoTaken = false
+    private var count = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -153,7 +155,7 @@ class MainActivity : AppCompatActivity() {
                         BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
 //                    Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
                     libTest.recognizeFace(baseContext, byteArr)
-
+                    count = 0
                 }
             })
     }
@@ -298,7 +300,7 @@ class MainActivity : AppCompatActivity() {
 //                cascadeClassifier.detectMultiScale(rgbMat, faces)
                 cascadeClassifier.detectMultiScale(grayMat, faces)
 
-                val numFaces = faces.toArray().size
+                var numFaces = faces.toArray().size
 //                Log.d("myLog", "Number of detected faces: $numFaces")
 
                 // Draw rectangles on bitmap for detected faces
@@ -310,8 +312,20 @@ class MainActivity : AppCompatActivity() {
                         strokeWidth = 5f
                         style = Paint.Style.STROKE
                     })
-                    Log.d("myLog", "얼굴이 탐지되었습니다.")
+                }
+
+                if (numFaces > 0) {
+                    count++
+                    Log.d("myLog", "${System.currentTimeMillis()}: 얼굴이 탐지되었습니다. $count")
+                } else if (count > 0) {
+                    count = 0
+                    Log.d("myLog", "${System.currentTimeMillis()}: count 초기화. $count")
+                }
+
+                if (numFaces > 0 && binding.grayscaleSwitch.isChecked && count > 10) {
                     takePhoto()
+                    count = 0
+                    Log.d("myLog", "${System.currentTimeMillis()}: takePhoto() 호출됨")
                 }
 
                 // Display the bitmap or do further processing with it

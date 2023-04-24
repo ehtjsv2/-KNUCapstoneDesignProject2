@@ -33,3 +33,5 @@ def main(byteArr):
     # 두 얼굴 이미지의 특징 벡터 비교
     distance = face_recognition.face_distance([encoding_1], encoding_2)[0]
     print("유클리드 거리: ", distance)
+
+    return distance
