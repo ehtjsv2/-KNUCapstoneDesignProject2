@@ -34,17 +34,17 @@ import java.util.concurrent.TimeUnit
 
 import android.graphics.Bitmap.Config.ARGB_8888
 import android.graphics.Bitmap.Config.RGB_565
+import android.graphics.Rect
 //import androidx.camera.core.internal.YuvToJpegProcessor
 import java.io.ByteArrayOutputStream
 
 import androidx.camera.*
 import androidx.core.content.ContentProviderCompat.requireContext
 import org.opencv.android.OpenCVLoader
-import org.opencv.core.CvType
-import org.opencv.core.Mat
-import org.opencv.core.MatOfRect
-import java.io.FileOutputStream
+import org.opencv.core.*
 import org.opencv.core.Point
+import java.io.FileOutputStream
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     // ViewBinding
@@ -61,6 +61,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var byteArr: ByteArray
     private var isPhotoTaken = false
     private var count = 0
+
+    private lateinit var libTest: FaceRecognitionLibrary
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,19 +101,35 @@ class MainActivity : AppCompatActivity() {
 //        test.chaquopyTest(this)
 
         /* image 변환 테스트 */
-        val libTest = FaceRecognitionLibrary()
-        val image: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.dohun006)
-        byteArr = libTest.bitmapToByteArray(image)
-        Log.d("mylog", "byteArr를 생성했습니다.")
-
-        libTest.recognizeFace(this, byteArr)
-
+//        libTest = FaceRecognitionLibrary()
+//        val image: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.dohun006)
+//        byteArr = libTest.bitmapToByteArray(image)
+//        Log.d("mylog", "byteArr를 생성했습니다.")
+//        val vector = libTest.getFaceVector(this, byteArr)
+//        Log.d("myLog", "반환된 벡터값: " + vector.contentToString())
 //        val bitmapFromByteArray: Bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
 //        Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
+
+        /* getFaceDistance 함수 테스트 */
+        libTest = FaceRecognitionLibrary()
+        val dohun1: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.dohun005)
+        var dohunArr1 = libTest.bitmapToByteArray(dohun1)
+        val vector1 = libTest.getFaceVector(this, dohunArr1)
+
+        val dohun2: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.dohun003)
+        var dohunArr2 = libTest.bitmapToByteArray(dohun2)
+        val vector2 = libTest.getFaceVector(this, dohunArr2)
+
+        val distance = libTest.getFaceDistance(vector1, vector2)
+        Log.d("myLog", "계산된 유클리드 거리: $distance")
 
         /* openCV 테스트 */
 //        val libTest = FaceRecognitionLibrary()
 //        libTest.opencvTest(this)
+
+        /* Python 초기화 테스트 */
+//        libTest = FaceRecognitionLibrary()
+//        libTest.initPython(this)
 
 
     }
@@ -148,13 +166,13 @@ class MainActivity : AppCompatActivity() {
                     Log.d("myLog", msg)
 
                     val bitmap = BitmapFactory.decodeFile(photoFile.absolutePath)
-                    val libTest = FaceRecognitionLibrary()
+//                    libTest = FaceRecognitionLibrary()
                     byteArr = libTest.bitmapToByteArray(bitmap)
                     Log.d("mylog", "byteArr를 생성했습니다.")
                     val bitmapFromByteArray: Bitmap =
                         BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
 //                    Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
-                    libTest.recognizeFace(baseContext, byteArr)
+                    libTest.getFaceVector(baseContext, byteArr)
                     count = 0
                 }
             })
@@ -169,6 +187,7 @@ class MainActivity : AppCompatActivity() {
                 // Image 처리 코드 작성
                 Log.d("CameraX-Debug", "analyze: got the frame at: " + image.imageInfo.timestamp)
 
+                image.imageInfo.rotationDegrees
                 val format = image.format // 35(YUV_420_888)
 
 //                val buffer = image.planes[0].buffer
@@ -232,9 +251,24 @@ class MainActivity : AppCompatActivity() {
                     Bitmap.createBitmap(rgbMat.cols(), rgbMat.rows(), Bitmap.Config.ARGB_8888)
                 Utils.matToBitmap(rgbMat, bmp2)
 
+                // Rotated Bitmap
+                val rotMat = Mat()
+                val rotation = when (image.imageInfo.rotationDegrees) {
+                    90 -> Core.rotate(rgbMat, rotMat, Core.ROTATE_90_CLOCKWISE)
+                    180 -> Core.rotate(rgbMat, rotMat, Core.ROTATE_180)
+                    270 -> Core.rotate(rgbMat, rotMat, Core.ROTATE_90_COUNTERCLOCKWISE)
+                    else -> rgbMat
+                }
+
+                // Convert Mat to Bitmap
+                val rotBitmap =
+                    Bitmap.createBitmap(rotMat.cols(), rotMat.rows(), Bitmap.Config.ARGB_8888)
+                Utils.matToBitmap(rotMat, rotBitmap)
+
+
                 // *회전 방향 확인
-                val display = windowManager.defaultDisplay
-                val rotation = display.rotation
+//                val display = windowManager.defaultDisplay
+//                val rotation = display.rotation
 //                Log.d("myLog", "Device orientation: $rotation")
 
                 // rotate image
@@ -323,9 +357,17 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (numFaces > 0 && binding.grayscaleSwitch.isChecked && count > 10) {
-                    takePhoto()
+                    // takePhoto()
+                    // libTest = FaceRecognitionLibrary()
+                    byteArr = libTest.bitmapToByteArray(bmp)
+                    Log.d("mylog", "byteArr를 생성했습니다.")
+                    val bitmapFromByteArray: Bitmap =
+                        BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
+//                    Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
+                    libTest.getFaceVector(baseContext, byteArr)
+
                     count = 0
-                    Log.d("myLog", "${System.currentTimeMillis()}: takePhoto() 호출됨")
+                    // Log.d("myLog", "${System.currentTimeMillis()}: takePhoto() 호출됨")
                 }
 
                 // Display the bitmap or do further processing with it

@@ -24,7 +24,7 @@ def main(byteArr):
     loaded_img2 = face_recognition.load_image_file(filename2)
     print("이미지 로드")
 
-    print("128차원 특징 벡터 생성 중...(촬영된 이미지로부터)")
+    print("128차원 특징 벡터 생성 중...")
     # encoding_1 = face_recognition.face_encodings(loaded_img1)[0]
     encoding_1 = face_recognition.face_encodings(image)[0]
     encoding_2 = face_recognition.face_encodings(loaded_img2)[0]
