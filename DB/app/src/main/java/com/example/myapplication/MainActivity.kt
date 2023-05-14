@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
         /*테스트*/
 
         //createID테스트
-        val test_id=db.createID(doubleArrayOf(2.0,3.0,1.0))
-        Log.d("dbTest","[MainActivity]  test_ID = $test_id")
+//        val test_id=db.createID(doubleArrayOf(2.0,3.0,1.0))
+//        Log.d("dbTest","[MainActivity]  test_ID = $test_id")
 
         //sizeOfUser 테스트
         val size = db.sizeOfUser()
@@ -40,7 +40,9 @@ class MainActivity : AppCompatActivity() {
         Log.d("dbTest","[MainActivity]  selectUser : $user2")
 
         //updateUser 테스트트
-
+        val isSucess=db.updateUser("ID_1",1,1,1,1,1)
+        val user3 = db.selectUser("ID_1")
+        Log.d("dbTest","[MainActivity]  updateUser : $user3")
         Log.d("dbTest","[MainActivity]  db테스트종료")
         setContentView(R.layout.activity_main)
     }

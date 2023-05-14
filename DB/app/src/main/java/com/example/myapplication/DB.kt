@@ -8,11 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import java.util.*
 
-//const val menu1:String = "americano_cnt"
-//const val menu2:String = "caffelatte_cnt"
-//const val menu3:String = "cappuccino_cnt"
-//const val menu4:String = "coldbrew_cnt"
-//const val menu5:String = "caffemocha_cnt"
+const val menu1:String = "americano_cnt"
+const val menu2:String = "caffelatte_cnt"
+const val menu3:String = "cappuccino_cnt"
+const val menu4:String = "coldbrew_cnt"
+const val menu5:String = "caffemocha_cnt"
 
 /** 앱 최초 시작시 createTable()을 해야 테이블 생성됨*/
 class DB(context: Context){
@@ -105,20 +105,59 @@ class DB(context: Context){
             val vector = cursor.getString(1).removeSurrounding("[","]")
                 .split(",").map{it.trim().toDouble()}
             val array_vector=vector.toDoubleArray()
-            val menu1 = cursor.getInt(2)
-            val menu2 = cursor.getInt(3)
-            val menu3 = cursor.getInt(4)
-            val menu4 = cursor.getInt(5)
-            val menu5 = cursor.getInt(6)
-            user = User(id,array_vector,menu1,menu2,menu3,menu4,menu5)
+            val menu_1 = cursor.getInt(2)
+            val menu_2 = cursor.getInt(3)
+            val menu_3 = cursor.getInt(4)
+            val menu_4 = cursor.getInt(5)
+            val menu_5 = cursor.getInt(6)
+            user = User(id,array_vector,menu_1,menu_2,menu_3,menu_4,menu_5)
         }
         catch (e : Exception){
             Log.e("dbTest","[selectUser()]  select error : No matched ID(${e.message})")
+            r_db.close()
             return null
         }
 
         return user
     }
+    /** User의 주문이력(음료_cnt)을 수정합니다 Id와 음료5가지cnt를 매개변수로.*/
+    fun updateUser(Id:String,menu_1:Int,menu_2:Int,menu_3:Int,menu_4:Int,menu_5:Int):Int{
+        val w_db=DBHlper.writableDatabase
+        try{
+            val query = "UPDATE USER SET $menu1=?, $menu2=?, $menu3=?, $menu4=?, $menu5=? WHERE id = ?"
+            Log.d("dbTest","[updateUser()]  query : $query")
+
+            val statement = w_db.compileStatement(query)
+            statement.bindLong(1, menu_1.toLong())
+            statement.bindLong(2, menu_2.toLong())
+            statement.bindLong(3, menu_3.toLong())
+            statement.bindLong(4, menu_4.toLong())
+            statement.bindLong(5, menu_5.toLong())
+            statement.bindString(6, Id)
+            statement.executeUpdateDelete()
+            statement.close()
+            //UPDATE 테이블명 SET 컬럼명 1 = 값1, 컬럼명2 = 값2, ... WHERE 조건식;
+        }catch (e:Exception){
+            Log.e("dbTest","[updateUser()]  update error : (${e.message})")
+            w_db.close()
+            return 0
+        }
+        w_db.close()
+        return 1;
+    }
+
+    /** 직접 사용하고 싶은 sql을 수행합니다.*/
+    fun customSql(sql:String,mode:Int):Int{
+        when(mode){
+            0->{
+                val r_db = DBHlper.readableDatabase
+                r_db.execSQL(sql)
+            }
+        }
+        return 0;
+    }
+
+
     /** sqlite 수행에 도움을 주는 클래스 */
     inner class DbHelper(context: Context):SQLiteOpenHelper(context,"db",null,1) {
         /* 앱 최초 실행 후 db이용할 때 한번 실행되는 함수, 다시하고싶으면 휴대폰 내 어플데이터삭제->어플삭제 */
