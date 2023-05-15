@@ -3,21 +3,11 @@ package com.example.facerecognitionlibrary
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.SurfaceTexture
 import android.util.Log
-import android.view.TextureView
 import android.widget.Toast
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
-import java.util.concurrent.Executors
 
 class FaceRecognitionLibrary {
 
@@ -37,7 +27,7 @@ class FaceRecognitionLibrary {
         Log.d("mylog", "myscript.py 코드 호출 성공")
     }
 
-    fun recognizeFace(context: Context, byteArr: ByteArray) {
+    fun recognizeFaceTest(context: Context, byteArr: ByteArray) {
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(context))
             Log.d("mylog", "Python start success")
@@ -53,15 +43,48 @@ class FaceRecognitionLibrary {
 //        val obj = myscript.callAttr("main")
         Log.d("mylog", "recognizeFace.py 코드 호출 성공")
         Log.d("myLog", "유클리드 거리: $obj")
-
-//        val byteArray: ByteArray = bitmapToByteArray(image)
-
     }
 
     fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         return stream.toByteArray()
+    }
+
+    fun getFaceVector(context: Context, byteArr: ByteArray): DoubleArray {
+        if (!Python.isStarted()) {
+            Python.start(AndroidPlatform(context))
+            Log.d("mylog", "Python start success")
+        }
+
+        val bitmapFromByteArray: Bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
+//        Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
+
+        val py = Python.getInstance()
+        val myscript = py.getModule("getFaceVector")
+        val bytesObj = py.builtins.callAttr("bytes", byteArr)
+        val obj = myscript.callAttr("main", bytesObj)
+//        val obj = myscript.callAttr("main")
+        Log.d("mylog", "getFaceVector.py 코드 호출 성공")
+        Log.d("myLog", "128차원 특징 벡터: $obj")
+
+//        val byteArray: ByteArray = bitmapToByteArray(image)
+
+        return obj.toJava(DoubleArray::class.java)
+    }
+
+    fun getFaceDistance(vector1: DoubleArray, vector2: DoubleArray): Double {
+        require(vector1.size == vector2.size && vector1.size == 128) {
+            "Vector dimensions should be 128."
+        }
+
+        var sum = 0.0
+        for (i in vector1.indices) {
+            val diff = vector1[i] - vector2[i]
+            sum += diff * diff
+        }
+
+        return kotlin.math.sqrt(sum)
     }
 
     fun opencvTest(context: Context) {
@@ -76,6 +99,12 @@ class FaceRecognitionLibrary {
         Log.d("mylog", "파이썬 코드 호출 성공")
     }
 
+    fun initPython(context: Context) {
+        if (!Python.isStarted()) {
+            Python.start(AndroidPlatform(context))
+            Log.d("myLog", "Python start success in $context")
+        }
+    }
 
 
     /*

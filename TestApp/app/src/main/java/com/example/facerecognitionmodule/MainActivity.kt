@@ -36,6 +36,10 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
+
+    //DB생성
+//    val db=DB(this)
+//    val isCreate = db.createTable()
     // ViewBinding
     lateinit private var binding: ActivityMainBinding
 
@@ -126,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         byteArr = libTest.bitmapToByteArray(image)
         Log.d("mylog", "byteArr를 생성했습니다.")
 
-        libTest.recognizeFace(this, byteArr)
+        libTest.getFaceVector(this, byteArr)
     }
 
 
@@ -206,7 +210,7 @@ class MainActivity : AppCompatActivity() {
                     val bitmapFromByteArray: Bitmap =
                         BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
 //                    Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
-                    libTest.recognizeFace(baseContext, byteArr)
+                    libTest.getFaceVector(baseContext, byteArr)
                     count = 0
                 }
             })
@@ -251,7 +255,7 @@ class MainActivity : AppCompatActivity() {
                     val bitmapFromByteArray: Bitmap =
                         BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
 //                    Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
-                    libTest.recognizeFace(baseContext, byteArr)
+                    libTest.getFaceVector(baseContext, byteArr)
                     count = 0
 
                     stopCameraPreview()
