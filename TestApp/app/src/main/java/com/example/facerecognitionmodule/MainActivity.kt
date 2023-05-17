@@ -408,6 +408,10 @@ class MainActivity : AppCompatActivity() {
                                 R.color.purple_500
                             )
                         )
+                        simpleOrderButton.setOnClickListener {
+                            val intent = Intent(this@MainActivity, simple_order_activity::class.java)
+                            startActivity(intent)
+                        }
                         stopCameraPreview()
                     }
                 }
