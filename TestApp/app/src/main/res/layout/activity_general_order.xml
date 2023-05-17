@@ -28,32 +28,39 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:srcCompat="@drawable/americano" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="아메리카노"
-            android:textColor="@color/myRed"
-            android:textSize="15sp" />
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground"
+            >
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:srcCompat="@drawable/americano" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:text="3,000원"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="아메리카노"
+                android:textColor="@color/myRed"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="3,000원"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
     <!-- 메뉴 2-->
     <LinearLayout
@@ -67,31 +74,37 @@
         app:layout_constraintEnd_toStartOf="@+id/layout_menu3"
         app:layout_constraintStart_toEndOf="@+id/layout_menu1"
         app:layout_constraintTop_toTopOf="@+id/layout_menu1">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:srcCompat="@drawable/caffelatte" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="카페라떼"
-            android:textColor="@color/myRed"
-            android:textSize="15sp" />
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:srcCompat="@drawable/caffelatte" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:text="3,000원"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="카페라떼"
+                android:textColor="@color/myRed"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="3,000원"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
     <!-- 메뉴 3-->
     <LinearLayout
@@ -103,7 +116,11 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/layout_menu2">
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="?attr/selectableItemBackground">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="80dp"
@@ -128,6 +145,7 @@
             android:text="3,000원"
             android:textSize="15sp"
             android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
     <!-- 메뉴 4-->
     <LinearLayout
@@ -140,7 +158,11 @@
         app:layout_constraintEnd_toEndOf="@+id/layout_menu1"
         app:layout_constraintStart_toStartOf="@+id/layout_menu1"
         app:layout_constraintTop_toBottomOf="@+id/layout_menu1">
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="80dp"
@@ -166,6 +188,7 @@
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
+    </LinearLayout>
     <!-- 메뉴 5-->
     <LinearLayout
         android:id="@+id/layout_menu5"
@@ -177,7 +200,11 @@
         app:layout_constraintEnd_toEndOf="@+id/layout_menu2"
         app:layout_constraintStart_toStartOf="@+id/layout_menu2"
         app:layout_constraintTop_toBottomOf="@+id/layout_menu2">
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="80dp"
@@ -202,6 +229,7 @@
             android:text="3,000원"
             android:textSize="15sp"
             android:textStyle="bold" />
+    </LinearLayout>
     </LinearLayout>
 
     <View

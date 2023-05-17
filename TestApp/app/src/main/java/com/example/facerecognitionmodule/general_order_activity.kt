@@ -15,22 +15,29 @@ class general_order_activity : AppCompatActivity() {
     lateinit var binding: ActivityGeneralOrderBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding =ActivityGeneralOrderBinding.inflate(layoutInflater)
-        binding.layoutMenu1.setOnClickListener {
-            Log.d("orderTest","menu1_click")
+        val menuCountArray = IntArray(5) // menu 5개 카운트
+
+        val menuList = listOf(
+            binding.layoutMenu1,
+            binding.layoutMenu2,
+            binding.layoutMenu3,
+            binding.layoutMenu4,
+            binding.layoutMenu5
+        )
+
+//      각 메뉴 클릭 리스너
+        menuList.forEachIndexed { index, menu ->
+            menu.setOnClickListener {
+                Log.d("orderTest", "menu${index + 1}_click")
+                menuCountArray[index]++
+            }
         }
-        binding.layoutMenu2.setOnClickListener {
-            Log.d("orderTest","menu2_click")
+        binding.btnPay.setOnClickListener{
+            Log.d("orderTest", "${menuCountArray[0]}, ${menuCountArray[1]}, ${menuCountArray[2]}, ${menuCountArray[3]}, ${menuCountArray[4]}")
         }
-        binding.layoutMenu3.setOnClickListener {
-            Log.d("orderTest","menu3_click")
-        }
-        binding.layoutMenu4.setOnClickListener {
-            Log.d("orderTest","menu4_click")
-        }
-        binding.layoutMenu5.setOnClickListener {
-            Log.d("orderTest","menu5_click")
-        }
+
 
         setContentView(binding.root)
 
