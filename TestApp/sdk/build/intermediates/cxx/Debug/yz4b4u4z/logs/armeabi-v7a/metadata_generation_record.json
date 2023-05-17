@@ -2,7 +2,7 @@
   {
     "level_": 0,
     "message_": "Start JSON generation. Platform version: 21 min SDK version: armeabi-v7a",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -11,12 +11,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": -1204724215
+    "memoizedHashCode": 1428858903
   },
   {
     "level_": 0,
-    "message_": "rebuilding JSON C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\\android_gradle_build.json due to:",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "message_": "rebuilding JSON D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\\android_gradle_build.json due to:",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -25,12 +25,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": -719216940
+    "memoizedHashCode": 1623372644
   },
   {
     "level_": 0,
     "message_": "- no fingerprint file, will remove stale configuration folder",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -39,12 +39,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": -237177746
+    "memoizedHashCode": -1898561924
   },
   {
     "level_": 0,
-    "message_": "removing stale contents from \u0027C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\u0027",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "message_": "removing stale contents from \u0027D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\u0027",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -53,12 +53,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": -1580842494
+    "memoizedHashCode": -442169138
   },
   {
     "level_": 0,
-    "message_": "created folder \u0027C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\u0027",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "message_": "created folder \u0027D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\u0027",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -67,12 +67,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": 717350774
+    "memoizedHashCode": 1317928770
   },
   {
     "level_": 0,
-    "message_": "executing cmake @echo off\n\"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmake\\\\3.22.1\\\\bin\\\\cmake.exe\" ^\n  \"-HC:\\\\Users\\\\user\\\\Desktop\\\\AndroidAppProgramming\\\\-KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\libcxx_helper\" ^\n  \"-DCMAKE_SYSTEM_NAME\u003dAndroid\" ^\n  \"-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\" ^\n  \"-DCMAKE_SYSTEM_VERSION\u003d21\" ^\n  \"-DANDROID_PLATFORM\u003dandroid-21\" ^\n  \"-DANDROID_ABI\u003darmeabi-v7a\" ^\n  \"-DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a\" ^\n  \"-DANDROID_NDK\u003dC:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\" ^\n  \"-DCMAKE_ANDROID_NDK\u003dC:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\" ^\n  \"-DCMAKE_TOOLCHAIN_FILE\u003dC:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\\\\build\\\\cmake\\\\android.toolchain.cmake\" ^\n  \"-DCMAKE_MAKE_PROGRAM\u003dC:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmake\\\\3.22.1\\\\bin\\\\ninja.exe\" ^\n  \"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dC:\\\\Users\\\\user\\\\Desktop\\\\AndroidAppProgramming\\\\-KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\build\\\\intermediates\\\\cxx\\\\Debug\\\\yz4b4u4z\\\\obj\\\\armeabi-v7a\" ^\n  \"-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dC:\\\\Users\\\\user\\\\Desktop\\\\AndroidAppProgramming\\\\-KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\build\\\\intermediates\\\\cxx\\\\Debug\\\\yz4b4u4z\\\\obj\\\\armeabi-v7a\" ^\n  \"-DCMAKE_BUILD_TYPE\u003dDebug\" ^\n  \"-BC:\\\\Users\\\\user\\\\Desktop\\\\AndroidAppProgramming\\\\-KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\.cxx\\\\Debug\\\\yz4b4u4z\\\\armeabi-v7a\" ^\n  -GNinja ^\n  \"-DANDROID_STL\u003dc++_shared\"\n",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "message_": "executing cmake @echo off\n\"C:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmake\\\\3.22.1\\\\bin\\\\cmake.exe\" ^\n  \"-HD:\\\\KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\libcxx_helper\" ^\n  \"-DCMAKE_SYSTEM_NAME\u003dAndroid\" ^\n  \"-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\" ^\n  \"-DCMAKE_SYSTEM_VERSION\u003d21\" ^\n  \"-DANDROID_PLATFORM\u003dandroid-21\" ^\n  \"-DANDROID_ABI\u003darmeabi-v7a\" ^\n  \"-DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a\" ^\n  \"-DANDROID_NDK\u003dC:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\" ^\n  \"-DCMAKE_ANDROID_NDK\u003dC:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\" ^\n  \"-DCMAKE_TOOLCHAIN_FILE\u003dC:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\\\\build\\\\cmake\\\\android.toolchain.cmake\" ^\n  \"-DCMAKE_MAKE_PROGRAM\u003dC:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmake\\\\3.22.1\\\\bin\\\\ninja.exe\" ^\n  \"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dD:\\\\KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\build\\\\intermediates\\\\cxx\\\\Debug\\\\yz4b4u4z\\\\obj\\\\armeabi-v7a\" ^\n  \"-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dD:\\\\KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\build\\\\intermediates\\\\cxx\\\\Debug\\\\yz4b4u4z\\\\obj\\\\armeabi-v7a\" ^\n  \"-DCMAKE_BUILD_TYPE\u003dDebug\" ^\n  \"-BD:\\\\KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\.cxx\\\\Debug\\\\yz4b4u4z\\\\armeabi-v7a\" ^\n  -GNinja ^\n  \"-DANDROID_STL\u003dc++_shared\"\n",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -81,12 +81,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": 992035808
+    "memoizedHashCode": -494497308
   },
   {
     "level_": 0,
-    "message_": "@echo off\n\"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmake\\\\3.22.1\\\\bin\\\\cmake.exe\" ^\n  \"-HC:\\\\Users\\\\user\\\\Desktop\\\\AndroidAppProgramming\\\\-KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\libcxx_helper\" ^\n  \"-DCMAKE_SYSTEM_NAME\u003dAndroid\" ^\n  \"-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\" ^\n  \"-DCMAKE_SYSTEM_VERSION\u003d21\" ^\n  \"-DANDROID_PLATFORM\u003dandroid-21\" ^\n  \"-DANDROID_ABI\u003darmeabi-v7a\" ^\n  \"-DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a\" ^\n  \"-DANDROID_NDK\u003dC:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\" ^\n  \"-DCMAKE_ANDROID_NDK\u003dC:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\" ^\n  \"-DCMAKE_TOOLCHAIN_FILE\u003dC:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\\\\build\\\\cmake\\\\android.toolchain.cmake\" ^\n  \"-DCMAKE_MAKE_PROGRAM\u003dC:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmake\\\\3.22.1\\\\bin\\\\ninja.exe\" ^\n  \"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dC:\\\\Users\\\\user\\\\Desktop\\\\AndroidAppProgramming\\\\-KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\build\\\\intermediates\\\\cxx\\\\Debug\\\\yz4b4u4z\\\\obj\\\\armeabi-v7a\" ^\n  \"-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dC:\\\\Users\\\\user\\\\Desktop\\\\AndroidAppProgramming\\\\-KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\build\\\\intermediates\\\\cxx\\\\Debug\\\\yz4b4u4z\\\\obj\\\\armeabi-v7a\" ^\n  \"-DCMAKE_BUILD_TYPE\u003dDebug\" ^\n  \"-BC:\\\\Users\\\\user\\\\Desktop\\\\AndroidAppProgramming\\\\-KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\.cxx\\\\Debug\\\\yz4b4u4z\\\\armeabi-v7a\" ^\n  -GNinja ^\n  \"-DANDROID_STL\u003dc++_shared\"\n",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "message_": "@echo off\n\"C:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmake\\\\3.22.1\\\\bin\\\\cmake.exe\" ^\n  \"-HD:\\\\KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\libcxx_helper\" ^\n  \"-DCMAKE_SYSTEM_NAME\u003dAndroid\" ^\n  \"-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\" ^\n  \"-DCMAKE_SYSTEM_VERSION\u003d21\" ^\n  \"-DANDROID_PLATFORM\u003dandroid-21\" ^\n  \"-DANDROID_ABI\u003darmeabi-v7a\" ^\n  \"-DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a\" ^\n  \"-DANDROID_NDK\u003dC:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\" ^\n  \"-DCMAKE_ANDROID_NDK\u003dC:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\" ^\n  \"-DCMAKE_TOOLCHAIN_FILE\u003dC:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\ndk\\\\23.1.7779620\\\\build\\\\cmake\\\\android.toolchain.cmake\" ^\n  \"-DCMAKE_MAKE_PROGRAM\u003dC:\\\\Users\\\\Administrator\\\\AppData\\\\Local\\\\Android\\\\Sdk\\\\cmake\\\\3.22.1\\\\bin\\\\ninja.exe\" ^\n  \"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dD:\\\\KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\build\\\\intermediates\\\\cxx\\\\Debug\\\\yz4b4u4z\\\\obj\\\\armeabi-v7a\" ^\n  \"-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dD:\\\\KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\build\\\\intermediates\\\\cxx\\\\Debug\\\\yz4b4u4z\\\\obj\\\\armeabi-v7a\" ^\n  \"-DCMAKE_BUILD_TYPE\u003dDebug\" ^\n  \"-BD:\\\\KNUCapstoneDesignProject2\\\\TestApp\\\\sdk\\\\.cxx\\\\Debug\\\\yz4b4u4z\\\\armeabi-v7a\" ^\n  -GNinja ^\n  \"-DANDROID_STL\u003dc++_shared\"\n",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -95,12 +95,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": 1518941185
+    "memoizedHashCode": -2038801309
   },
   {
     "level_": 0,
-    "message_": "Exiting generation of C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\\compile_commands.json.bin normally",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "message_": "Exiting generation of D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\\compile_commands.json.bin normally",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -109,12 +109,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": 438016940
+    "memoizedHashCode": -780748808
   },
   {
     "level_": 0,
     "message_": "done executing cmake",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -123,12 +123,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": 1647778030
+    "memoizedHashCode": -13606148
   },
   {
     "level_": 0,
-    "message_": "deleted unexpected build output C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\build\\intermediates\\cxx\\Debug\\yz4b4u4z\\obj\\armeabi-v7a\\libc++_shared.so in incremental regenerate",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "message_": "deleted unexpected build output D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\build\\intermediates\\cxx\\Debug\\yz4b4u4z\\obj\\armeabi-v7a\\libc++_shared.so in incremental regenerate",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -137,12 +137,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": -1713227965
+    "memoizedHashCode": -750450349
   },
   {
     "level_": 0,
-    "message_": "hard linked C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\\compile_commands.json to C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\tools\\debug\\armeabi-v7a\\compile_commands.json",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "message_": "hard linked D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\\compile_commands.json to D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\tools\\debug\\armeabi-v7a\\compile_commands.json",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -151,12 +151,12 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": -1586663999
+    "memoizedHashCode": -599371701
   },
   {
     "level_": 0,
     "message_": "JSON generation completed without problems",
-    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -165,6 +165,6 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
-    "memoizedHashCode": -709116182
+    "memoizedHashCode": 1924466936
   }
 ]

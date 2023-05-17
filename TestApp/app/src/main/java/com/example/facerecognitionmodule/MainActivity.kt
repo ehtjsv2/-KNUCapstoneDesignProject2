@@ -58,13 +58,23 @@ class MainActivity : AppCompatActivity() {
     private var test_var = false
 
     private lateinit var textViewMessage: TextView
+    private lateinit var matchedIDView: TextView
+    private lateinit var createdIDView: TextView
+    private lateinit var messageView: TextView
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
+    private lateinit var libTest: FaceRecognitionLibrary
+
+    private lateinit var db: DB
+    private var new_id: String? = null
+    var closestUser: User? = null
+
+    var closestDistance = Double.MAX_VALUE
+
 
     companion object {
         private const val REQUEST_CODE_GENERAL_ORDER = 1
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,8 +84,28 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        /* DB 생성 */
+//        val db = DB(this)
+        db = DB(this)
+        val isCreate = db.createTable()
+        Log.d("dbTest", "[MainActivity]  isCreate = $isCreate")
+
+        /* sizeOfUser 테스트 */
+//        val size = db.sizeOfUser()
+//        Log.d("dbTest", "[MainActivity]  size = $size")
+
+        /* selectAllUser 테스트 */
+        val list = db.selectAllUser()
+        for (user in list) {
+            Log.d("dbTest", "[MainActivity]  userId = ${user.ID} , vector[0] = ${user.vector[0]}")
+        }
+
         val generalOrderButton: Button = findViewById(R.id.general_Order_Button)
         val simpleOrderButton: Button = findViewById(R.id.simple_Order_Button)
+        matchedIDView = binding.matchedIDView
+        createdIDView = binding.createdIDView
+        messageView = binding.messageView
+
         //generalOrderButton.setOnClickListener {
         //    val intent = Intent(this, general_order_activity::class.java)
         //   startActivity(intent)
@@ -89,16 +119,16 @@ class MainActivity : AppCompatActivity() {
         /* 카메라 사용 */
         startCamera()
 
-        binding.cameraCaptureButton.setOnClickListener {
-            takePhoto()
-        }
+//        binding.cameraCaptureButton.setOnClickListener {
+//            takePhoto()
+//        }
 
-       // if (enable) {
+        // if (enable) {
         //    generalOrderButton.setBackgroundColor(ContextCompat.getColor(this, R.color.purple_500))
-         //   generalOrderButton.setOnClickListener {
-         //       val intent = Intent(this, general_order_activity::class.java)
-          //      startActivity(intent)
-          //  }
+        //   generalOrderButton.setOnClickListener {
+        //       val intent = Intent(this, general_order_activity::class.java)
+        //      startActivity(intent)
+        //  }
         //} else {
         //    generalOrderButton.setBackgroundColor(Color.GRAY)
         //    generalOrderButton.setOnClickListener(null)
@@ -111,24 +141,24 @@ class MainActivity : AppCompatActivity() {
         //binding.generalOrderButton.setBackgroundResource(android.R.drawable.btn_default)
 
 
-        binding.grayscaleSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                binding.grayView.visibility = View.VISIBLE
-            } else {
-                binding.grayView.visibility = View.INVISIBLE
-            }
-        }
+//        binding.grayscaleSwitch.setOnCheckedChangeListener { _, isChecked ->
+//            if (isChecked) {
+//                binding.grayView.visibility = View.VISIBLE
+//            } else {
+//                binding.grayView.visibility = View.INVISIBLE
+//            }
+//        }
 
-        if(test_var){
+        if (test_var) {
             //stopCameraPreview()
             //displayTextOnCameraPreview()
         }
 
         /* image 변환 테스트 */
-        val libTest = FaceRecognitionLibrary()
+        libTest = FaceRecognitionLibrary()
         val image: Bitmap = BitmapFactory.decodeResource(this.resources, R.drawable.dohun006)
         byteArr = libTest.bitmapToByteArray(image)
-        Log.d("mylog", "byteArr를 생성했습니다.")
+        Log.d("myLog", "byteArr를 생성했습니다.")
 
         libTest.getFaceVector(this, byteArr)
     }
@@ -149,13 +179,13 @@ class MainActivity : AppCompatActivity() {
                 // 액티비티 배경색을 흰색으로 설정
                 window.decorView.setBackgroundColor(Color.WHITE)
 
-                // 'ID-001 생성' 문구를 화면 중앙에 계속 표시하는 코드
-                val toast = Toast.makeText(this, "ID-001 생성", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                val toastView = toast.view
-                val toastMessage = toastView?.findViewById<TextView>(android.R.id.message)
-                toastMessage?.gravity = Gravity.CENTER
-                toast.show()
+//                // 'ID-001 생성' 문구를 화면 중앙에 계속 표시하는 코드
+//                val toast = Toast.makeText(this, "${closestUser?.ID}. 생성", Toast.LENGTH_SHORT)
+//                toast.setGravity(Gravity.CENTER, 0, 0)
+//                val toastView = toast.view
+//                val toastMessage = toastView?.findViewById<TextView>(android.R.id.message)
+//                toastMessage?.gravity = Gravity.CENTER
+//                toast.show()
             }
         }, ContextCompat.getMainExecutor(this))
     }
@@ -264,12 +294,12 @@ class MainActivity : AppCompatActivity() {
                 }
             })
     }
+
     // viewFinder 설정 : Preview
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         val simpleOrderButton = findViewById<Button>(R.id.simple_Order_Button)
         val generalOrderButton = findViewById<Button>(R.id.general_Order_Button)
-
 
         class MyImageAnalyzer : ImageAnalysis.Analyzer {
             override fun analyze(image: ImageProxy) {
@@ -374,56 +404,179 @@ class MainActivity : AppCompatActivity() {
                     })
                 }
 
-              if (numFaces > 0) {
+                if (numFaces > 0) {
                     count++
                     Log.d("myLog", "${System.currentTimeMillis()}: 얼굴이 탐지되었습니다. $count")
+                    runOnUiThread {
+                        messageView.text = "얼굴 탐지 중입니다. $count"
+                    }
+
                 } else if (count > 0) {
                     count = 0
                     Log.d("myLog", "${System.currentTimeMillis()}: count 초기화. $count")
-                }
-
-                if (numFaces > 0 && binding.grayscaleSwitch.isChecked() && count > 10) {
-                    count = 0;
-                    //takePhoto()
-                    binding.grayscaleSwitch.isChecked = false;
-                    enable = true
-                    Log.d("myLog", "${System.currentTimeMillis()}: takePhoto() 호출됨");
-                }
-
-                runOnUiThread {
-                    if (enable) {
-                        generalOrderButton.setBackgroundColor(
-                            ContextCompat.getColor(
-                                this@MainActivity,
-                                R.color.purple_500
-                            )
-                        )
-                        generalOrderButton.setOnClickListener {
-                            val intent = Intent(this@MainActivity, general_order_activity::class.java)
-                            startActivity(intent)
-                        }
-                       simpleOrderButton.setBackgroundColor(
-                            ContextCompat.getColor(
-                                this@MainActivity,
-                                R.color.purple_500
-                            )
-                        )
-                        stopCameraPreview()
+                    runOnUiThread {
+                        messageView.text = "카메라를 정면으로 바라보세요."
                     }
                 }
 
-                // Rotate the bitmap by 90 degrees
+                // 이미지를 90도 회전
                 val matrix = Matrix()
-                matrix.postRotate(360f)
+                matrix.postRotate(-90f) // 90도 회전
 
-// Create a new rotated bitmap
-                val rotatedBitmap = Bitmap.createBitmap(graybmp, 0, 0, graybmp.width, graybmp.height, matrix, true)
+                val rotatedBitmap = Bitmap.createBitmap(
+                    bmp,
+                    0,
+                    0,
+                    bmp.width,
+                    bmp.height,
+                    matrix,
+                    true
+                )
 
+//                if (numFaces > 0 && binding.grayscaleSwitch.isChecked() && count > 10) {
+                if (numFaces > 0 && count > 10) {
+                    count = 0;
+                    //takePhoto()
+//                    binding.grayscaleSwitch.isChecked = false;
+                    enable = true
 
-                // Display the bitmap or do further processing with it
-                runOnUiThread {
-                    binding.grayView.setImageBitmap(rotatedBitmap)
+                    byteArr = libTest.bitmapToByteArray(rotatedBitmap)
+                    Log.d("myLog", "byteArr를 생성했습니다.")
+                    val bitmapFromByteArray: Bitmap =
+                        BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
+//                    Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
+                    val new_vector = libTest.getFaceVector(baseContext, byteArr)
+
+                    // 벡터 비교 수행
+                    val size = db.sizeOfUser()
+
+                    val list = db.selectAllUser()
+                    for (user in list) {
+                        val distance = libTest.getFaceDistance(new_vector, user.vector)
+
+                        if (distance < closestDistance) {
+                            closestUser = user
+                            closestDistance = distance
+                        }
+                    }
+
+                    Log.d("myLog", "closestDistance: $closestDistance")
+
+                    /* 매칭되는 ID가 있는 경우 */
+                    if (closestDistance < 0.4) {
+
+                        runOnUiThread {
+                            // 카메라 프리뷰 작동 중지
+                            stopCameraPreview()
+
+                            // "ID-XXX님 어서오세요" 텍스트를 상단에 표시
+                            matchedIDView.text = "${closestUser?.ID}님 어서오세요."
+                            matchedIDView.visibility = View.VISIBLE
+
+                            // 일반 주문, 간단 주문 활성화
+                            generalOrderButton.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    this@MainActivity,
+                                    R.color.purple_500
+                                )
+                            )
+
+                            generalOrderButton.setOnClickListener {
+                                val intent =
+                                    Intent(
+                                        this@MainActivity,
+                                        general_order_activity::class.java
+                                    )
+                                intent.putExtra("userID", closestUser?.ID)
+                                startActivity(intent)
+                            }
+
+                            simpleOrderButton.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    this@MainActivity,
+                                    R.color.purple_500
+                                )
+                            )
+                        }
+
+                    }
+                    /* 매칭되는 ID가 없는 경우 */
+                    else {
+                        // 새로운 ID 생성
+                        new_id = db.createID(new_vector)
+
+                        runOnUiThread {
+                            // 카메라 프리뷰 작동 중지
+                            stopCameraPreview()
+                            messageView.visibility = View.INVISIBLE
+
+                            // "ID-XXX 생성" 텍스트를 카메라 프리뷰에 출력
+                            createdIDView.text = "${new_id} 생성"
+                            createdIDView.visibility = View.VISIBLE
+
+                            // 일반 주문 활성화
+                            generalOrderButton.setBackgroundColor(
+                                ContextCompat.getColor(
+                                    this@MainActivity,
+                                    R.color.purple_500
+                                )
+                            )
+
+                            generalOrderButton.setOnClickListener {
+                                val intent =
+                                    Intent(
+                                        this@MainActivity,
+                                        general_order_activity::class.java
+                                    )
+                                intent.putExtra("userID", closestUser?.ID)
+                                startActivity(intent)
+                            }
+
+                        }
+
+                    }
                 }
+
+//                runOnUiThread {
+//                    if (enable) {
+//                        generalOrderButton.setBackgroundColor(
+//                            ContextCompat.getColor(
+//                                this@MainActivity,
+//                                R.color.purple_500
+//                            )
+//                        )
+//
+//                        generalOrderButton.setOnClickListener {
+//                            val intent =
+//                                Intent(this@MainActivity, general_order_activity::class.java)
+//                            startActivity(intent)
+//                        }
+//
+//                        simpleOrderButton.setBackgroundColor(
+//                            ContextCompat.getColor(
+//                                this@MainActivity,
+//                                R.color.purple_500
+//                            )
+//                        )
+//
+//                        stopCameraPreview()
+//                    }
+//                }
+
+//                // Rotate the bitmap by 90 degrees
+//                val matrix = Matrix()
+//                matrix.postRotate(360f)
+//
+//// Create a new rotated bitmap
+//                val rotatedBitmap =
+//                    Bitmap.createBitmap(graybmp, 0, 0, graybmp.width, graybmp.height, matrix, true)
+
+
+//                // Display the bitmap or do further processing with it
+//                runOnUiThread {
+////                    binding.grayView.setImageBitmap(rotatedBitmap)
+//                    binding.grayView.setImageBitmap(graybmp)
+//                }
 
                 image.close()
             }
