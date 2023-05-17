@@ -217,7 +217,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="카푸치노"
+            android:text="카페모카"
             android:textColor="@color/myRed"
             android:textSize="15sp" />
 
@@ -270,6 +270,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
         <!--        메뉴1-->
         <LinearLayout
+            android:id="@+id/layout_basket1"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:orientation="horizontal"
@@ -303,6 +304,7 @@
         </LinearLayout>
         <!--        메뉴2-->
         <LinearLayout
+            android:id="@+id/layout_basket2"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:orientation="horizontal"
@@ -336,6 +338,7 @@
         </LinearLayout>
         <!--        메뉴3-->
         <LinearLayout
+            android:id="@+id/layout_basket3"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:orientation="horizontal"
@@ -369,6 +372,7 @@
         </LinearLayout>
         <!--        메뉴4-->
         <LinearLayout
+            android:id="@+id/layout_basket4"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:orientation="horizontal"
@@ -402,6 +406,7 @@
         </LinearLayout>
         <!--        메뉴5-->
         <LinearLayout
+            android:id="@+id/layout_basket5"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:orientation="horizontal"
