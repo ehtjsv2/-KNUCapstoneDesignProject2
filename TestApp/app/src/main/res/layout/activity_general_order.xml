@@ -11,8 +11,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:text="일반 주문"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -23,7 +23,7 @@
         android:id="@+id/layout_menu1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/menu_stroke"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="@+id/textView"
@@ -31,8 +31,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="116dp"
-            android:layout_height="107dp"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -60,8 +60,8 @@
         android:id="@+id/layout_menu2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/menu_stroke"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/layout_menu3"
@@ -69,8 +69,8 @@
         app:layout_constraintTop_toTopOf="@+id/layout_menu1">
 
         <ImageView
-            android:layout_width="116dp"
-            android:layout_height="107dp"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -105,8 +105,8 @@
         app:layout_constraintTop_toTopOf="@+id/layout_menu2">
 
         <ImageView
-            android:layout_width="116dp"
-            android:layout_height="107dp"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -142,8 +142,8 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_menu1">
 
         <ImageView
-            android:layout_width="116dp"
-            android:layout_height="107dp"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -179,8 +179,8 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_menu2">
 
         <ImageView
-            android:layout_width="116dp"
-            android:layout_height="107dp"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -220,7 +220,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:text="장바구니"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -260,7 +260,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="40dp"
                 android:text="1개"
                 android:textStyle="bold" />
 
@@ -278,7 +278,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="70dp"
@@ -293,13 +293,13 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="40dp"
                 android:text="1개"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/text_menu2_price"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
@@ -326,13 +326,13 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="40dp"
                 android:text="1개"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/text_menu3_price"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
@@ -359,13 +359,13 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="40dp"
                 android:text="1개"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/text_menu4_price"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="50dp"
@@ -392,7 +392,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="40dp"
                 android:text="1개"
                 android:textStyle="bold" />
 
@@ -414,10 +414,10 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/red_btn"
-        android:text="결제하기"
-        android:textStyle="bold"
         android:elevation="20dp"
+        android:text="결제하기"
         android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -428,12 +428,11 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/gray_btn"
+        android:elevation="20dp"
         android:text="취소하기"
         android:textStyle="bold"
-        android:elevation="20dp"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
