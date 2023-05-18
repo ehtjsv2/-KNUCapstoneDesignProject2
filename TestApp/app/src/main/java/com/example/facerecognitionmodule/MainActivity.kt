@@ -605,7 +605,7 @@ class MainActivity : AppCompatActivity() {
                                         this@MainActivity,
                                         general_order_activity::class.java
                                     )
-                                intent.putExtra("userID", closestUser?.ID)
+                                intent.putExtra("id", "${closestUser?.ID}")
                                 startActivity(intent)
                             }
 
@@ -655,7 +655,7 @@ class MainActivity : AppCompatActivity() {
                                         this@MainActivity,
                                         general_order_activity::class.java
                                     )
-                                intent.putExtra("userID", closestUser?.ID)
+                                intent.putExtra("id", "${closestUser?.ID}")
                                 startActivity(intent)
                             }
 
