@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.example.facerecognitionmodule.databinding.ActivityGeneralOrderBinding
 import java.text.NumberFormat
 import java.util.*
@@ -21,7 +22,17 @@ class general_order_activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =ActivityGeneralOrderBinding.inflate(layoutInflater)
-
+        //DB객체 생성
+        val db = DB(this)
+        val receivedIntent = intent
+        var id:String? = receivedIntent.getStringExtra("id")
+        if(id==null)id="ID_1"
+        //DB테스트
+        // select테스트
+        val user:User? = db.selectUser(id)
+            Log.d("dbTest","[generalOrderActivity]  userId = ${user?.ID} , vector[0] = ${user!!.vector[0]}" +
+                    ", ${user.americano_cnt}, ${user.caffelatte_cnt}, ${user.cappuccino_cnt}, ${user.coldbrew_cnt}, ${user.caffemocah_cnt}")
+        val Id:String = "ID_1"
         /* 장바구니 리스트 */
         val menuBasketList = listOf(
             binding.layoutBasket1,
@@ -30,6 +41,7 @@ class general_order_activity : AppCompatActivity() {
             binding.layoutBasket4,
             binding.layoutBasket5
         )
+        // 초기 장바구니 visible 설정
         menuBasketList.forEachIndexed{index,layout->
             layout.visibility= View.GONE
         }
@@ -61,11 +73,21 @@ class general_order_activity : AppCompatActivity() {
 
             }
         }
+        // 결제하기 버튼 클릭 시
         binding.btnPay.setOnClickListener{
             Log.d("orderTest", "${menuCountArray[0]}, ${menuCountArray[1]}, " +
                     "${menuCountArray[2]}, ${menuCountArray[3]}, ${menuCountArray[4]}")
-        }
 
+            db.updateUser(Id,menuCountArray[0],menuCountArray[1],menuCountArray[2],
+                menuCountArray[3], menuCountArray[4])
+
+            Toast.makeText(this,"주문 완료!!",Toast.LENGTH_LONG).show()
+            super.onBackPressed()
+        }
+        //취소하기 버튼 클릭 시
+        binding.btnCancel.setOnClickListener {
+            super.onBackPressed()
+        }
 
         setContentView(binding.root)
 

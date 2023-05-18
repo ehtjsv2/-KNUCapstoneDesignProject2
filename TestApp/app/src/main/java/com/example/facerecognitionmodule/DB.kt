@@ -125,7 +125,8 @@ class DB(context: Context){
         val w_db=DBHlper.writableDatabase
         try{
             val query = "UPDATE USER SET $menu1=?, $menu2=?, $menu3=?, $menu4=?, $menu5=? WHERE id = ?"
-            Log.d("dbTest","[updateUser()]  query : $query")
+            Log.d("dbTest","[updateUser()]  query : UPDATE USER SET " +
+                    "$menu1=$menu_1, $menu2=$menu_2, $menu3=$menu_3, $menu4=$menu_4, $menu5=$menu_5 WHERE id = $Id")
 
             val statement = w_db.compileStatement(query)
             statement.bindLong(1, menu_1.toLong())
