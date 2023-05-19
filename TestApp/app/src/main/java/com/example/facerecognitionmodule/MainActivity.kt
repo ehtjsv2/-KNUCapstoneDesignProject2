@@ -420,7 +420,7 @@ class MainActivity : AppCompatActivity() {
                 val matrix = Matrix()
                 matrix.postRotate(360f)
 
-// Create a new rotated bitmap
+                // Create a new rotated bitmap
                 val rotatedBitmap = Bitmap.createBitmap(graybmp, 0, 0, graybmp.width, graybmp.height, matrix, true)
 
 
