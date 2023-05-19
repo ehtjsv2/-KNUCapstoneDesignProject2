@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--
     <Button
         android:id="@+id/camera_capture_button"
         android:layout_width="100dp"
@@ -17,6 +18,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+    -->
 
     <!-- 일반 주문 버튼 -->
     <Button
@@ -24,10 +26,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="일반 주문"
-        android:layout_margin="16dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/simple_Order_Button"
         app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
     <!-- 간단 주문 버튼 -->
     <Button
@@ -35,12 +39,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="간단 주문"
-        android:layout_margin="16dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-         />
+        app:layout_constraintStart_toEndOf="@id/general_Order_Button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
 
+    <!--
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/grayscaleSwitch"
         android:layout_width="wrap_content"
@@ -52,23 +59,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    -->
 
     <TextView
-        android:id="@+id/textViewMessage"
+        android:id="@+id/matchedIDView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AA-001 생성"
+        android:text="(사용자ID)님 어서오세요"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/viewFinder"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/grayView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="2dp"
         android:background="@color/black"
+        android:elevation="2dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,11 +86,38 @@
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
         tools:layout_editor_absoluteX="-42dp" />
+
+    <TextView
+        android:id="@+id/messageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="카메라를 정면으로 바라보세요."
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewFinder" />
+
+    <TextView
+        android:id="@+id/createdIDView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(새로운 아이디) 생성"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,12 +11,21 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": 577798241
   },
   {
     "level_": 0,
     "message_": "JSON \u0027D:\\test\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\x86\\android_gradle_build.json\u0027 was up-to-date",
     "file_": "D:\\test\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "memoizedHashCode": 1827583359
+  },
+  {
+    "level_": 0,
+    "message_": "JSON \u0027D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\x86\\android_gradle_build.json\u0027 was up-to-date",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> module
     "tag_": "debug|x86",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -25,7 +34,11 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": 508668070
+=======
+    "memoizedHashCode": -1449611485
+>>>>>>> module
   },
   {
     "level_": 0,
@@ -39,6 +52,10 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": 369687406
+=======
+    "memoizedHashCode": 1619472524
+>>>>>>> module
   }
 ]

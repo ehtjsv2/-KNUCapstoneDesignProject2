@@ -2,7 +2,11 @@
   {
     "level_": 0,
     "message_": "Start JSON generation. Platform version: 21 min SDK version: arm64-v8a",
+<<<<<<< HEAD
     "file_": "D:\\test\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> module
     "tag_": "debug|arm64-v8a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -11,12 +15,21 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": -1540644195
   },
   {
     "level_": 0,
     "message_": "JSON \u0027D:\\test\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\arm64-v8a\\android_gradle_build.json\u0027 was up-to-date",
     "file_": "D:\\test\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "memoizedHashCode": -500990115
+  },
+  {
+    "level_": 0,
+    "message_": "JSON \u0027D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\arm64-v8a\\android_gradle_build.json\u0027 was up-to-date",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> module
     "tag_": "debug|arm64-v8a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -25,12 +38,20 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": -1690602206
+=======
+    "memoizedHashCode": -70557695
+>>>>>>> module
   },
   {
     "level_": 0,
     "message_": "JSON generation completed without problems",
+<<<<<<< HEAD
     "file_": "D:\\test\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> module
     "tag_": "debug|arm64-v8a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -39,6 +60,10 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": -437938116
+=======
+    "memoizedHashCode": 601715964
+>>>>>>> module
   }
 ]
