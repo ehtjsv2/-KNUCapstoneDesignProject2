@@ -35,7 +35,6 @@ class general_order_activity : AppCompatActivity() {
             "[generalOrderActivity]  userId = ${user!!.ID} ," +
                     ", ${user.americano_cnt}, ${user.caffelatte_cnt}, ${user.cappuccino_cnt}, ${user.coldbrew_cnt}, ${user.caffemocah_cnt}"
         )
-       // val Id: String = "ID_1"
         /* 장바구니 리스트 */
         val menuBasketList = listOf(
             binding.layoutBasket1,

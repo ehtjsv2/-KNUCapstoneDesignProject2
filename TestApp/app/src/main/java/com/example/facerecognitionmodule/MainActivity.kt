@@ -647,7 +647,7 @@ class MainActivity : AppCompatActivity() {
                                 val intent = Intent(
                                     this@MainActivity, general_order_activity::class.java
                                 )
-                                intent.putExtra("id", "${closestUser?.ID}")
+                                intent.putExtra("id", "$new_id")
                                 startActivity(intent)
                             }
 
