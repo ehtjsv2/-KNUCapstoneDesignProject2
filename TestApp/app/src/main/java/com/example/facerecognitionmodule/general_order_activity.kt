@@ -32,10 +32,10 @@ class general_order_activity : AppCompatActivity() {
         val user: User? = db.selectUser(id)
         Log.d(
             "dbTest",
-            "[generalOrderActivity]  userId = ${user?.ID} , vector[0] = ${user!!.vector[0]}" +
+            "[generalOrderActivity]  userId = ${user!!.ID} ," +
                     ", ${user.americano_cnt}, ${user.caffelatte_cnt}, ${user.cappuccino_cnt}, ${user.coldbrew_cnt}, ${user.caffemocah_cnt}"
         )
-        val Id: String = "ID_1"
+       // val Id: String = "ID_1"
         /* 장바구니 리스트 */
         val menuBasketList = listOf(
             binding.layoutBasket1,
@@ -87,8 +87,8 @@ class general_order_activity : AppCompatActivity() {
             )
 
             db.updateUser(
-                Id, menuCountArray[0], menuCountArray[1], menuCountArray[2],
-                menuCountArray[3], menuCountArray[4]
+                id, user.americano_cnt+menuCountArray[0], user.caffelatte_cnt+menuCountArray[1], user.cappuccino_cnt+menuCountArray[2],
+                user.coldbrew_cnt+menuCountArray[3], user.caffemocah_cnt+menuCountArray[4]
             )
 
             Toast.makeText(this, "주문 완료!!", Toast.LENGTH_LONG).show()
