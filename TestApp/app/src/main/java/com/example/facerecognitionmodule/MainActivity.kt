@@ -609,6 +609,18 @@ class MainActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }
 
+                            /* 간단 주문 인텐트 부분
+                            simpleOrderButton.setOnClickListener {
+                                val intent =
+                                    Intent(
+                                        this@MainActivity,
+                                        simple_order_activity::class.java
+                                    )
+                                intent.putExtra("id", "${closestUser?.ID}")
+                                startActivity(intent)
+                            }
+                             */
+
 //                            simpleOrderButton.setBackgroundColor(
 //                                ContextCompat.getColor(
 //                                    this@MainActivity,
