@@ -315,8 +315,7 @@ class MainActivity : AppCompatActivity() {
 
         // Create time-stamped output file to hold the image
         val photoFile = File(
-            outputDirectory,
-            newJpgFileName()
+            outputDirectory, newJpgFileName()
         )
 
 
@@ -325,8 +324,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set up image capture listener, which is triggered after photo has
         // been taken
-        imageCapture.takePicture(
-            outputOptions,
+        imageCapture.takePicture(outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
 
@@ -361,8 +359,7 @@ class MainActivity : AppCompatActivity() {
 
         // Create time-stamped output file to hold the image
         val photoFile = File(
-            outputDirectory,
-            newJpgFileName()
+            outputDirectory, newJpgFileName()
         )
 
         // Create output options object which contains file + metadata
@@ -370,8 +367,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set up image capture listener, which is triggered after photo has
         // been taken
-        imageCapture.takePicture(
-            outputOptions,
+        imageCapture.takePicture(outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
 
@@ -443,9 +439,8 @@ class MainActivity : AppCompatActivity() {
 
                 if (bmp == null) {
                     Log.e(
-                        "CameraX-Debug", "Failed to decode byte array into a Bitmap. " +
-                                "Bytes size: ${nv21.size}, image format: ${image.format}, " +
-                                "image dimensions: ${image.width} x ${image.height}."
+                        "CameraX-Debug",
+                        "Failed to decode byte array into a Bitmap. " + "Bytes size: ${nv21.size}, image format: ${image.format}, " + "image dimensions: ${image.width} x ${image.height}."
                     )
                     return
                 }
@@ -525,65 +520,17 @@ class MainActivity : AppCompatActivity() {
                 } else if (count > 0) {
                     count = 0
                     Log.d("myLog", "${System.currentTimeMillis()}: count 초기화. $count")
-//<<<<<<< HEAD
-//                }
-//
-//                if (numFaces > 0 && binding.grayscaleSwitch.isChecked() && count > 10) {
-//                    count = 0;
-//                    //takePhoto()
-//                    binding.grayscaleSwitch.isChecked = false;
-//                    enable = true
-//                    Log.d("myLog", "${System.currentTimeMillis()}: takePhoto() 호출됨");
-//                }
-//
-//                runOnUiThread {
-//                    if (enable) {
-//                        generalOrderButton.setBackgroundColor(
-//                            ContextCompat.getColor(
-//                                this@MainActivity,
-//                                R.color.purple_500
-//                            )
-//                        )
-//                        generalOrderButton.setOnClickListener {
-//                            val intent = Intent(this@MainActivity, general_order_activity::class.java)
-//                            startActivity(intent)
-//                        }
-//                       simpleOrderButton.setBackgroundColor(
-//                            ContextCompat.getColor(
-//                                this@MainActivity,
-//                                R.color.purple_500
-//                            )
-//                        )
-//                        simpleOrderButton.setOnClickListener {
-//                            val intent = Intent(this@MainActivity, simple_order_activity::class.java)
-//                            startActivity(intent)
-//                        }
-//                        stopCameraPreview()
-//=======
                     runOnUiThread {
                         messageView.text = "카메라를 정면으로 바라보세요."
-//>>>>>>> module
                     }
                 }
 
                 // 이미지를 90도 회전
                 val matrix = Matrix()
                 matrix.postRotate(-90f) // 90도 회전
-
-//<<<<<<< HEAD
-                // Create a new rotated bitmap
-//                val rotatedBitmap = Bitmap.createBitmap(graybmp, 0, 0, graybmp.width, graybmp.height, matrix, true)
-//=======
                 val rotatedBitmap = Bitmap.createBitmap(
-                    bmp,
-                    0,
-                    0,
-                    bmp.width,
-                    bmp.height,
-                    matrix,
-                    true
+                    bmp, 0, 0, bmp.width, bmp.height, matrix, true
                 )
-//>>>>>>> module
 
 //                if (numFaces > 0 && binding.grayscaleSwitch.isChecked() && count > 10) {
                 if (numFaces > 0 && count > 10) {
@@ -641,26 +588,20 @@ class MainActivity : AppCompatActivity() {
 //                            )
 
                             generalOrderButton.setOnClickListener {
-                                val intent =
-                                    Intent(
-                                        this@MainActivity,
-                                        general_order_activity::class.java
-                                    )
+                                val intent = Intent(
+                                    this@MainActivity, general_order_activity::class.java
+                                )
                                 intent.putExtra("id", "${closestUser?.ID}")
                                 startActivity(intent)
                             }
 
-                            /* 간단 주문 인텐트 부분
                             simpleOrderButton.setOnClickListener {
-                                val intent =
-                                    Intent(
-                                        this@MainActivity,
-                                        simple_order_activity::class.java
-                                    )
+                                val intent = Intent(
+                                    this@MainActivity, simple_order_activity::class.java
+                                )
                                 intent.putExtra("id", "${closestUser?.ID}")
                                 startActivity(intent)
                             }
-                             */
 
 //                            simpleOrderButton.setBackgroundColor(
 //                                ContextCompat.getColor(
@@ -703,11 +644,9 @@ class MainActivity : AppCompatActivity() {
 //                            )
 
                             generalOrderButton.setOnClickListener {
-                                val intent =
-                                    Intent(
-                                        this@MainActivity,
-                                        general_order_activity::class.java
-                                    )
+                                val intent = Intent(
+                                    this@MainActivity, general_order_activity::class.java
+                                )
                                 intent.putExtra("id", "${closestUser?.ID}")
                                 startActivity(intent)
                             }
@@ -773,21 +712,16 @@ class MainActivity : AppCompatActivity() {
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
             // Preview
-            preview = Preview.Builder()
-                .build()
-                .also {
+            preview = Preview.Builder().build().also {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
             // ImageCapture
-            imageCapture = ImageCapture.Builder()
-                .build()
+            imageCapture = ImageCapture.Builder().build()
 
             // ImageAnalysis
             val imageAnalysis = ImageAnalysis.Builder()
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build()
-                .apply {
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build().apply {
                     setAnalyzer(ContextCompat.getMainExecutor(this@MainActivity), MyImageAnalyzer())
                 }
 
@@ -801,11 +735,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview,
-                    imageCapture,
-                    imageAnalysis
+                    this, cameraSelector, preview, imageCapture, imageAnalysis
                 )
 
             } catch (exc: Exception) {

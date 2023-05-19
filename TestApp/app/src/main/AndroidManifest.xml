@@ -20,7 +20,10 @@
             android:exported="false" />
         <activity
             android:name=".general_order_activity"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -30,6 +33,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

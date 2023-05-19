@@ -16,6 +16,7 @@
     },
     "memoizedSize": -1,
 <<<<<<< HEAD
+<<<<<<< HEAD
     "memoizedHashCode": 179073785
   },
   {
@@ -30,6 +31,14 @@
     "message_": "rebuilding JSON D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\\android_gradle_build.json due to:",
     "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
 >>>>>>> module
+=======
+    "memoizedHashCode": 1412052324
+  },
+  {
+    "level_": 0,
+    "message_": "JSON \u0027C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\armeabi-v7a\\android_gradle_build.json\u0027 was up-to-date",
+    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> DB
     "tag_": "debug|armeabi-v7a",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -38,6 +47,7 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
 <<<<<<< HEAD
     "memoizedHashCode": -1503043353
   },
@@ -259,6 +269,9 @@
     "memoizedSize": -1,
     "memoizedHashCode": -599371701
 >>>>>>> module
+=======
+    "memoizedHashCode": -365233786
+>>>>>>> DB
   },
   {
     "level_": 0,
@@ -277,9 +290,13 @@
     },
     "memoizedSize": -1,
 <<<<<<< HEAD
+<<<<<<< HEAD
     "memoizedHashCode": 674681818
 =======
     "memoizedHashCode": 1924466936
 >>>>>>> module
+=======
+    "memoizedHashCode": 1907660357
+>>>>>>> DB
   }
 ]

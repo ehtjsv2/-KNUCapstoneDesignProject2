@@ -123,6 +123,7 @@ class DB(context: Context) {
     }
 
     /** User의 주문이력(음료_cnt)을 수정합니다 Id와 음료5가지cnt를 매개변수로.*/
+
     fun updateUser(
         Id: String,
         menu_1: Int,
@@ -135,8 +136,10 @@ class DB(context: Context) {
         try {
             val query =
                 "UPDATE USER SET $menu1=?, $menu2=?, $menu3=?, $menu4=?, $menu5=? WHERE id = ?"
-            Log.d("dbTest", "[updateUser()]  query : $query")
-
+            Log.d(
+                "dbTest", "[updateUser()]  query : UPDATE USER SET " +
+                        "$menu1=$menu_1, $menu2=$menu_2, $menu3=$menu_3, $menu4=$menu_4, $menu5=$menu_5 WHERE id = $Id"
+            )
             val statement = w_db.compileStatement(query)
             statement.bindLong(1, menu_1.toLong())
             statement.bindLong(2, menu_2.toLong())

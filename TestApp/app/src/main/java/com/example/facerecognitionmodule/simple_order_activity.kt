@@ -3,6 +3,7 @@ package com.example.facerecognitionmodule
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.facerecognitionmodule.databinding.ActivitySimpleOrderBinding
 import kotlin.Pair
 
@@ -15,12 +16,12 @@ class simple_order_activity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-
+        val receivedIntent = intent
         val db = DB(this)
-        val vector = doubleArrayOf(0.1, 0.2, 0.3)
-        val userId = db.createID(vector)!!
+//        val vector = doubleArrayOf(0.1, 0.2, 0.3)
+        val userId = receivedIntent.getStringExtra("id")
         println("유저 아이디: $userId")
-        val updateResult = db.updateUser(userId, 4, 7, 8, 3, 10)
+//        val updateResult = db.updateUser(userId!!, 4, 7, 8, 3, 10)
 
         userId?.let {
             // User ID 생성 확인
@@ -72,6 +73,10 @@ class simple_order_activity : AppCompatActivity() {
                 }
             }
             binding.grayButton.setOnClickListener {
+                finish()
+            }
+            binding.redButton.setOnClickListener {
+                Toast.makeText(this,"주문 완료!",Toast.LENGTH_LONG).show()
                 finish()
             }
         }

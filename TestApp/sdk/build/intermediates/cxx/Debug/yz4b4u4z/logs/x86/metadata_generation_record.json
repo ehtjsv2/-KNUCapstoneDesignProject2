@@ -2,7 +2,11 @@
   {
     "level_": 0,
     "message_": "Start JSON generation. Platform version: 21 min SDK version: x86",
+<<<<<<< HEAD
     "file_": "D:\\test\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> DB
     "tag_": "debug|x86",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -11,6 +15,7 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
 <<<<<<< HEAD
     "memoizedHashCode": 577798241
   },
@@ -26,6 +31,14 @@
     "message_": "JSON \u0027D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\x86\\android_gradle_build.json\u0027 was up-to-date",
     "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
 >>>>>>> module
+=======
+    "memoizedHashCode": 1810776780
+  },
+  {
+    "level_": 0,
+    "message_": "JSON \u0027C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\x86\\android_gradle_build.json\u0027 was up-to-date",
+    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> DB
     "tag_": "debug|x86",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -34,16 +47,24 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
 <<<<<<< HEAD
     "memoizedHashCode": 508668070
 =======
     "memoizedHashCode": -1449611485
 >>>>>>> module
+=======
+    "memoizedHashCode": -1181514258
+>>>>>>> DB
   },
   {
     "level_": 0,
     "message_": "JSON generation completed without problems",
+<<<<<<< HEAD
     "file_": "D:\\test\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> DB
     "tag_": "debug|x86",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -53,9 +74,13 @@
     },
     "memoizedSize": -1,
 <<<<<<< HEAD
+<<<<<<< HEAD
     "memoizedHashCode": 369687406
 =======
     "memoizedHashCode": 1619472524
 >>>>>>> module
+=======
+    "memoizedHashCode": 1602665945
+>>>>>>> DB
   }
 ]
