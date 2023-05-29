@@ -2,10 +2,7 @@ package com.example.facerecognitionmodule
 
 //import androidx.camera.core.internal.YuvToJpegProcessor
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.*
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,29 +11,16 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.example.facerecognitionlibrary.FaceRecognitionLibrary
 import com.example.facerecognitionmodule.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
-import org.opencv.android.OpenCVLoader
-import org.opencv.android.Utils
-import org.opencv.core.Core
-import org.opencv.core.CvType
-import org.opencv.core.Mat
-import org.opencv.core.MatOfRect
-import org.opencv.imgproc.Imgproc
-import org.opencv.objdetect.CascadeClassifier
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
 import java.lang.Runnable
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -124,9 +108,9 @@ class MainActivity : AppCompatActivity() {
         simpleOrderButton.isEnabled = false
 
 
-        class FaceRecognitionLibrary2 : FaceRecognitionLibrary(this,this,5){
+        class FaceRecognitionLibrary2 : FaceRecognitionLibrary(this, this, 5) {
             override fun reachSeletedCount(vector: DoubleArray) {
-                Log.d("myLog","count가 임계값에 도달했음. vector는 얼굴벡터를 담고있음")
+                Log.d("myLog", "count가 임계값에 도달했음. vector는 얼굴벡터를 담고있음")
                 // 벡터 비교 수행
                 val list = db.selectAllUser()
                 closestDistance = Double.MAX_VALUE
@@ -232,9 +216,9 @@ class MainActivity : AppCompatActivity() {
         /* image 변환 테스트 */
         libTest = FaceRecognitionLibrary2()
 
-        libTest.settingModule(this,this)
+        libTest.settingModule(this, this)
         /* 카메라 사용 */
-        libTest.startCamera(this,this,binding.viewFinder.surfaceProvider,binding.messageView)
+        libTest.startCamera(this, this, binding.viewFinder.surfaceProvider, binding.messageView)
 
         // LiveData를 관찰하여 값의 변경을 감지하는 Observer 생성
 
@@ -256,7 +240,7 @@ class MainActivity : AppCompatActivity() {
                     delay(10000) // 10초 동안 대기
                     generalOrderButton.isEnabled = false
                     simpleOrderButton.isEnabled = false
-                    startCamera()
+                    libTest.startCamera(baseContext, this@MainActivity, binding.viewFinder.surfaceProvider, binding.messageView)
                     runOnUiThread {
                         binding.createdIDView.visibility = View.INVISIBLE
                         binding.matchedIDView.visibility = View.INVISIBLE
@@ -274,7 +258,6 @@ class MainActivity : AppCompatActivity() {
         outputDirectory = getOutputDirectory()
 
         cameraExecutor = Executors.newSingleThreadExecutor()
-
 
 
     }
@@ -310,9 +293,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
+    /*
     // viewFinder 설정 : Preview
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -572,8 +553,8 @@ class MainActivity : AppCompatActivity() {
 
             // Preview
             var preview = Preview.Builder().build().also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                }
+                it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+            }
 
             // ImageCapture
             imageCapture = ImageCapture.Builder().build()
@@ -603,7 +584,7 @@ class MainActivity : AppCompatActivity() {
 
         }, ContextCompat.getMainExecutor(this))
     }
-
+    */
 
     private fun getOutputDirectory(): File {
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
