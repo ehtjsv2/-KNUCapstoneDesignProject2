@@ -34,6 +34,9 @@ abstract class FaceRecognitionLibrary(private val context: Context, private val 
     private lateinit var byteArr: ByteArray
 
 
+    /** Convert bitmap to byteArray
+     * @param bitmap Bitmap data to convert to ByteArray.
+     *  */
     fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)

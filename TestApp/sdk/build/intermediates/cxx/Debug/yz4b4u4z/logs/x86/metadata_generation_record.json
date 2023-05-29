@@ -2,7 +2,11 @@
   {
     "level_": 0,
     "message_": "Start JSON generation. Platform version: 21 min SDK version: x86",
+<<<<<<< HEAD
     "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> 211e7da81223739bf31a0b9a1f6aee7f831a947d
     "tag_": "debug|x86",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -11,12 +15,21 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": 1170846606
   },
   {
     "level_": 0,
     "message_": "JSON \u0027C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\x86\\android_gradle_build.json\u0027 was up-to-date",
     "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "memoizedHashCode": -816772437
+  },
+  {
+    "level_": 0,
+    "message_": "JSON \u0027D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\.cxx\\Debug\\yz4b4u4z\\x86\\android_gradle_build.json\u0027 was up-to-date",
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> 211e7da81223739bf31a0b9a1f6aee7f831a947d
     "tag_": "debug|x86",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -25,12 +38,20 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": -1821444432
+=======
+    "memoizedHashCode": 201000015
+>>>>>>> 211e7da81223739bf31a0b9a1f6aee7f831a947d
   },
   {
     "level_": 0,
     "message_": "JSON generation completed without problems",
+<<<<<<< HEAD
     "file_": "C:\\Users\\user\\Desktop\\AndroidAppProgramming\\-KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+=======
+    "file_": "D:\\KNUCapstoneDesignProject2\\TestApp\\sdk\\libcxx_helper\\CMakeLists.txt",
+>>>>>>> 211e7da81223739bf31a0b9a1f6aee7f831a947d
     "tag_": "debug|x86",
     "diagnosticCode_": 0,
     "memoizedIsInitialized": 1,
@@ -39,6 +60,10 @@
       "fieldsDescending": {}
     },
     "memoizedSize": -1,
+<<<<<<< HEAD
     "memoizedHashCode": 962735771
+=======
+    "memoizedHashCode": -1024883272
+>>>>>>> 211e7da81223739bf31a0b9a1f6aee7f831a947d
   }
 ]
