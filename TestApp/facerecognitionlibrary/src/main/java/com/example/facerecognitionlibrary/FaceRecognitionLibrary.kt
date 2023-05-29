@@ -1,49 +1,38 @@
 package com.example.facerecognitionlibrary
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.*
 import android.util.Log
+import android.view.FocusFinder
+import android.view.SurfaceView
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.*
+import androidx.camera.core.Preview.SurfaceProvider
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
+import org.opencv.android.OpenCVLoader
+import org.opencv.android.Utils
+import org.opencv.core.Core
+import org.opencv.core.CvType
+import org.opencv.core.Mat
+import org.opencv.core.MatOfRect
+import org.opencv.imgproc.Imgproc
+import org.opencv.objdetect.CascadeClassifier
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 
-class FaceRecognitionLibrary {
+abstract class FaceRecognitionLibrary(private val context: Context, private val activity: AppCompatActivity,private val threshold: Int = 10) {
+    private var count = 0
+    private var enable = false
+    private lateinit var byteArr: ByteArray
 
-    fun showToast(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
-    fun chaquopyTest(context: Context) {
-        if (!Python.isStarted()) {
-            Python.start(AndroidPlatform(context))
-            Log.d("mylog", "Python start success")
-        }
-
-        val py = Python.getInstance()
-        val myscript = py.getModule("myscript")
-        val obj = myscript.callAttr("main")
-        Log.d("mylog", "myscript.py 코드 호출 성공")
-    }
-
-    fun recognizeFaceTest(context: Context, byteArr: ByteArray) {
-        if (!Python.isStarted()) {
-            Python.start(AndroidPlatform(context))
-            Log.d("mylog", "Python start success")
-        }
-
-        val bitmapFromByteArray: Bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
-//        Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
-
-        val py = Python.getInstance()
-        val myscript = py.getModule("recognizeFace")
-        val bytesObj = py.builtins.callAttr("bytes", byteArr)
-        val obj = myscript.callAttr("main", bytesObj)
-//        val obj = myscript.callAttr("main")
-        Log.d("mylog", "recognizeFace.py 코드 호출 성공")
-        Log.d("myLog", "유클리드 거리: $obj")
-    }
 
     fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
@@ -57,7 +46,7 @@ class FaceRecognitionLibrary {
             Log.d("mylog", "Python start success")
         }
 
-        val bitmapFromByteArray: Bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
+//        val bitmapFromByteArray: Bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
 //        Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
 
         val py = Python.getInstance()
@@ -87,85 +76,205 @@ class FaceRecognitionLibrary {
         return kotlin.math.sqrt(sum)
     }
 
-    fun opencvTest(context: Context) {
-        if (!Python.isStarted()) {
-            Python.start(AndroidPlatform(context))
+    fun settingModule(context: Context, activity: AppCompatActivity) {
+        val image: Bitmap = BitmapFactory.decodeResource(activity.resources, R.raw.dohun003)
+        val byteArr = bitmapToByteArray(image)
+        Log.d("myLog", "byteArr를 생성했습니다.")
 
-        }
-
-        val py = Python.getInstance()
-        val myscript = py.getModule("opencv_human_detection")
-        val obj = myscript.callAttr("main")
-        Log.d("mylog", "파이썬 코드 호출 성공")
+        getFaceVector(context, byteArr)
     }
 
-    fun initPython(context: Context) {
-        if (!Python.isStarted()) {
-            Python.start(AndroidPlatform(context))
-            Log.d("myLog", "Python start success in $context")
-        }
-    }
-
-
-    /*
-    fun cameraTest(context: Context, textureView: TextureView) {
-        // CameraExecutor를 초기화
-        cameraExecutor = Executors.newSingleThreadExecutor()
-
-        // 카메라 프로바이더를 설정합니다.
+    fun startCamera(context: Context, activity: AppCompatActivity,surfaceProvider: SurfaceProvider ,messageView: TextView) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
-        cameraProviderFuture.addListener(Runnable {
-            // 사용 가능한 카메라 프로바이더를 가져옵니다.
-            val cameraProvider = cameraProviderFuture.get()
 
-            // Preview 객체를 만듭니다.
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    // 화면에 미리보기를 보여줄 TextureView를 지정합니다.
-                    it.setSurfaceProvider(textureView.surfaceProvider)
-                }
+        class MyImageAnalyzer : ImageAnalysis.Analyzer {
+            private var lastAnalyzedTimestamp = 0L // 1초 단위로 프레임 처리하기위한 변수
+            override fun analyze(image: ImageProxy) {
+                val currentTime = System.currentTimeMillis()
+                val elapsedTime = currentTime - lastAnalyzedTimestamp
+                if (elapsedTime >= 1000) {
+                    // 프레임 처리 로직 작성
+                    val yBuffer = image.planes[0].buffer // Y
+                    val uBuffer = image.planes[1].buffer // U
+                    val vBuffer = image.planes[2].buffer // V
 
-            // 사용 가능한 후면 카메라를 선택합니다.
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+                    val ySize = yBuffer.remaining()
+                    val uSize = uBuffer.remaining()
+                    val vSize = vBuffer.remaining()
 
-            try {
-                // 카메라 프로바이더에서 사용 가능한 카메라의 영상을 가져옵니다.
-                cameraProvider.bindToLifecycle(
-                    /* lifecycleOwner= */ null,
-                    cameraSelector,
-                    preview
-                )
+                    val nv21 = ByteArray(ySize + uSize + vSize)
 
-                // 카메라 영상 처리를 위한 OpenCV 로딩을 수행합니다.
-                CoroutineScope(Dispatchers.IO).launch {
-                    loadOpenCv(context)
-                }
+                    yBuffer.get(nv21, 0, ySize)
+                    vBuffer.get(nv21, ySize, vSize)
+                    uBuffer.get(nv21, ySize + vSize, uSize)
 
-                // Face Cascade Classifier를 로딩합니다.
-                val faceCascadeClassifier = loadCascadeClassifier(context, R.raw.haarcascade_frontalface_default)
+                    val yuvImage = YuvImage(nv21, ImageFormat.NV21, image.width, image.height, null)
 
-                // 각 프레임마다 얼굴 랜드마크를 검출합니다.
-                val imageAnalyzer = androidx.camera.core.ImageAnalysis.Builder()
-                    .setBackpressureStrategy(androidx.camera.core.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                    .build()
-                    .also {
-                        it.setAnalyzer(cameraExecutor, FaceAnalyzer(faceCascadeClassifier, cameraExecutor))
+                    val out = ByteArrayOutputStream()
+                    yuvImage.compressToJpeg(Rect(0, 0, yuvImage.width, yuvImage.height), 100, out)
+
+                    val imageBytes = out.toByteArray()
+                    val bmp = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+                    if (bmp == null) {
+                        Log.e(
+                            "CameraX-Debug",
+                            "Failed to decode byte array into a Bitmap. " + "Bytes size: ${nv21.size}, image format: ${image.format}, " + "image dimensions: ${image.width} x ${image.height}."
+                        )
+                        return
                     }
 
-                // 사용 가능한 카메라에서 프리뷰와 분석을 위한 세션을 생성합니다.
-                val camera = cameraProvider.bindToLifecycle(
-                    /* lifecycleOwner= */ null,
-                    cameraSelector,
-                    preview,
-                    imageAnalyzer
+                    OpenCVLoader.initDebug();
+
+                    // Create Mat object
+                    val yuvMat = Mat(image.height + image.height / 2, image.width, CvType.CV_8UC1)
+                    yuvMat.put(0, 0, nv21)
+
+                    // Convert YUV to RGB
+                    val rgbMat = Mat(image.height, image.width, CvType.CV_8UC3)
+                    Imgproc.cvtColor(yuvMat, rgbMat, Imgproc.COLOR_YUV2RGB_NV21)
+
+                    // Rotate RGB Mat
+                    val rotatedMat = Mat()
+                    Core.rotate(rgbMat, rotatedMat, Core.ROTATE_90_COUNTERCLOCKWISE)
+
+                    // Convert Mat to Bitmap
+                    val bmp2 =
+                        Bitmap.createBitmap(rgbMat.cols(), rgbMat.rows(), Bitmap.Config.ARGB_8888)
+                    Utils.matToBitmap(rgbMat, bmp2)
+
+                    // *회전 방향 확인
+                    val display = activity.windowManager.defaultDisplay
+                    val rotation = display.rotation
+
+
+                    // Load cascade classifier file
+                    val cascadeFile =
+                        File(context.cacheDir, "haarcascade_frontalface_alt.xml")
+                    val inputStream =
+                        context.resources.openRawResource(R.raw.haarcascade_frontalface_alt)
+                    val outputStream = FileOutputStream(cascadeFile)
+                    // 파일 복사
+                    val buffer = ByteArray(4096)
+                    var bytesRead: Int
+                    while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                        outputStream.write(buffer, 0, bytesRead)
+                    }
+
+                    // 파일 로드
+                    val cascadeClassifier = CascadeClassifier(cascadeFile.absolutePath)
+
+                    // grayscale 매트릭스로 변환
+                    val grayMat = Mat()
+                    Imgproc.cvtColor(rotatedMat, grayMat, Imgproc.COLOR_RGB2GRAY)
+                    val graybmp =
+                        Bitmap.createBitmap(grayMat.cols(), grayMat.rows(), Bitmap.Config.ARGB_8888)
+                    Utils.matToBitmap(grayMat, graybmp)
+
+                    // Detect faces
+                    val faces = MatOfRect()
+//                cascadeClassifier.detectMultiScale(rgbMat, faces)
+                    cascadeClassifier.detectMultiScale(grayMat, faces)
+
+                    var numFaces = faces.toArray().size
+//                Log.d("myLog", "Number of detected faces: $numFaces")
+                    // Draw rectangles on bitmap for detected faces
+                    val canvas = Canvas(graybmp)
+                    faces.toList().forEach { face ->
+                        val rect = Rect(face.x, face.y, face.x + face.width, face.y + face.height)
+                        canvas.drawRect(rect, Paint().apply {
+                            color = Color.RED
+                            strokeWidth = 5f
+                            style = Paint.Style.STROKE
+                        })
+                    }
+
+                    if (numFaces > 0) {
+                        count++
+                        Log.d("myLog", "${System.currentTimeMillis()}: 얼굴이 탐지되었습니다. $count")
+                        messageView.post {
+                            messageView.text = "얼굴 탐지 중입니다. $count"
+                        }
+
+                    } else if (count > 0) {
+                        count = 0
+                        Log.d("myLog", "${System.currentTimeMillis()}: count 초기화. $count")
+                        messageView.post {
+                            messageView.text = "카메라를 정면으로 바라보세요."
+                        }
+                    }
+                    // 이미지를 90도 회전
+                    val matrix = Matrix()
+                    matrix.postRotate(-90f) // 90도 회전
+                    val rotatedBitmap = Bitmap.createBitmap(
+                        bmp, 0, 0, bmp.width, bmp.height, matrix, true
+                    )
+
+                    if (numFaces > 0 && count > threshold) { // count 가 임계값 넘었을 때
+                        count = 0;
+                        //takePhoto()
+//                    binding.grayscaleSwitch.isChecked = false;
+                        enable = true
+
+                        byteArr = bitmapToByteArray(rotatedBitmap)
+                        Log.d("myLog", "byteArr를 생성했습니다.")
+                        val bitmapFromByteArray: Bitmap =
+                            BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
+//                    Log.d("mylog", "byteArr를 다시 Bitmap으로 변환했습니다.")
+                        val new_vector = getFaceVector(context, byteArr)
+//                        Log.d("myLog", "벡터를 생성했습니다.")
+
+                        reachSeletedCount(new_vector)
+
+
+                    }
+                    lastAnalyzedTimestamp = currentTime
+                }
+                image.close()
+            }
+        }
+
+        cameraProviderFuture.addListener({
+            // Used to bind the lifecycle of cameras to the lifecycle owner
+            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+
+            // Preview
+            var preview = Preview.Builder().build().also {
+                it.setSurfaceProvider(surfaceProvider)
+            }
+
+            // ImageCapture
+            val imageCapture = ImageCapture.Builder().build()
+
+            // ImageAnalysis
+            val imageAnalysis = ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build().apply {
+                    setAnalyzer(ContextCompat.getMainExecutor(context), MyImageAnalyzer())
+                }
+
+            // Select back camera as a default
+            // val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+
+            try {
+                // Unbind use cases before rebinding
+                cameraProvider.unbindAll()
+
+                // Bind use cases to camera
+                cameraProvider.bindToLifecycle(
+                    activity, cameraSelector, preview, imageCapture, imageAnalysis
                 )
 
             } catch (exc: Exception) {
-                Log.e(TAG, "카메라 세션을 만들지 못했습니다.", exc)
+                Log.d("CameraX-Debug", "Use case binding failed", exc)
             }
+
         }, ContextCompat.getMainExecutor(context))
     }
+    fun isSameUser(similarity : Double, similarityThreshold:Double=0.4):Boolean{
+        if(similarity<similarityThreshold)return true
+        else return false
+    }
+    abstract fun reachSeletedCount(vector : DoubleArray)
 
-    */
 }

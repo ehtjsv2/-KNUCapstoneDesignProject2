@@ -22,7 +22,7 @@ class simple_order_activity : AppCompatActivity() {
         val userId = receivedIntent.getStringExtra("id")
         println("유저 아이디: $userId")
 //        val updateResult = db.updateUser(userId!!, 4, 7, 8, 3, 10)
-
+        binding.greetingTextView.text=userId+"님 안녕하세요!"
         userId?.let {
             // User ID 생성 확인
             Log.d("DB", "생성된 유저 ID: $it")
