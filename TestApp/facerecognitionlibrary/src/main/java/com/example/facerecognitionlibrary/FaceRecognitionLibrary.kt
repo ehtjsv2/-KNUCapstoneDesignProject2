@@ -45,6 +45,9 @@ class FaceRecognitionLibrary {
         Log.d("myLog", "유클리드 거리: $obj")
     }
 
+    /** Convert bitmap to byteArray
+     * @param bitmap Bitmap data to convert to ByteArray.
+     *  */
     fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
