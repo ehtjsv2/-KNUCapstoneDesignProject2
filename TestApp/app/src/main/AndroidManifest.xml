@@ -16,14 +16,14 @@
         android:theme="@style/Theme.FaceRecognitionModule"
         tools:targetApi="31">
         <activity
+            android:name=".user_list_activity"
+            android:exported="false" />
+        <activity
             android:name=".simple_order_activity"
             android:exported="false" />
         <activity
             android:name=".general_order_activity"
-            android:exported="false" >
-
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -33,7 +33,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

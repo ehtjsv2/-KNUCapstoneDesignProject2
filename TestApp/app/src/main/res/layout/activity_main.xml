@@ -119,5 +119,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.35" />
 
+    <Button
+        android:id="@+id/user_list_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="유저목록"
+        app:layout_constraintEnd_toEndOf="@+id/simple_Order_Button"
+        app:layout_constraintStart_toStartOf="@+id/general_Order_Button"
+        app:layout_constraintTop_toBottomOf="@+id/general_Order_Button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
