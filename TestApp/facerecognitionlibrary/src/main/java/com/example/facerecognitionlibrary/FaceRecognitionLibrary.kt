@@ -25,6 +25,21 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
+/**
+ * Abstract class representing a face recognition library.
+ * To use this library, you need to implement the abstract function `reachSeletedCount()`, which defines the action to
+ * take when face extraction is successful.
+ *
+ * @param context The context of the Android application.
+ * @param activity The reference to the current activity or AppCompatActivity.
+ * @param threshold The threshold value for face detection count. Default value is 10.
+ * @constructor Creates an instance of the FaceRecognitionLibrary.
+ * @see bitmapToByteArray
+ * @see getFaceVector
+ * @see getFaceDistance
+ * @see startCamera
+ * @see reachSeletedCount
+ */
 abstract class FaceRecognitionLibrary(
     private val context: Context,
     private val activity: AppCompatActivity,
@@ -35,15 +50,29 @@ abstract class FaceRecognitionLibrary(
     private lateinit var byteArr: ByteArray
 
 
-    /** Convert bitmap to byteArray
+    /**
+     * Convert Bitmap to ByteArray. return converted `ByteArray`
+     * The converted ByteArray data may be transferred as a factor of a `getFaceVector()` function.
+     *
      * @param bitmap Bitmap data to convert to ByteArray.
-     *  */
+     * @return converted ByteArray
+     * @see getFaceVector
+     * */
     fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         return stream.toByteArray()
     }
 
+    /**
+     * Extract the face feature vector from the passed `ByteArray` data.
+     * return face feature vector as a `DoubleArray`, or `null` if the extraction fails.
+     * The ByteArray data must contain a face image.
+     * @param context The context of the Android application.
+     * @param byteArr The ByteArray data containing the face image.
+     * @return The extracted face feature vector as a `DoubleArray`, or `null` if the extraction fails.
+     * @see bitmapToByteArray
+     */
     fun getFaceVector(context: Context, byteArr: ByteArray): DoubleArray? {
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(context))
@@ -66,6 +95,16 @@ abstract class FaceRecognitionLibrary(
         return obj?.toJava(DoubleArray::class.java)
     }
 
+    /**
+     * Calculates the distance between two face feature vectors.
+     * return The distance between the two face feature vectors as `Double`.
+     * Each vector value can be obtained by the `getFaceVector()` function.
+     * @param vector1 The first face feature vector.
+     * @param vector2 The second face feature vector.
+     * @return The distance between the two face feature vectors.
+     * @throws IllegalArgumentException if the dimensions of the input vectors are not equal to 128.
+     * @see getFaceVector
+     */
     fun getFaceDistance(vector1: DoubleArray, vector2: DoubleArray): Double {
         require(vector1.size == vector2.size && vector1.size == 128) {
             "Vector dimensions should be 128."
@@ -80,6 +119,12 @@ abstract class FaceRecognitionLibrary(
         return kotlin.math.sqrt(sum)
     }
 
+    /**
+     * Function for module initialization. You must call this before using the `getFaceVector()` function.
+     * @param context The context of the Android application.
+     * @param activity The reference to the current activity or AppCompatActivity.
+     * @see getFaceVector
+     */
     fun settingModule(context: Context, activity: AppCompatActivity) {
         val image: Bitmap = BitmapFactory.decodeResource(activity.resources, R.raw.dohun003)
         val byteArr = bitmapToByteArray(image)
@@ -88,6 +133,13 @@ abstract class FaceRecognitionLibrary(
         getFaceVector(context, byteArr)
     }
 
+    /**
+     * Starts the camera with the specified configuration.
+     * @param context The context of the Android application.
+     * @param activity The reference to the current activity or AppCompatActivity.
+     * @param surfaceProvider The SurfaceProvider for displaying the camera preview.
+     * @param messageView The TextView to display messages or status updates.
+     */
     fun startCamera(
         context: Context, activity: AppCompatActivity,
         surfaceProvider: SurfaceProvider,
@@ -282,11 +334,26 @@ abstract class FaceRecognitionLibrary(
         }, ContextCompat.getMainExecutor(context))
     }
 
+
+    /**
+     * Checks if the similarity score between two face feature vectors indicates the same user.
+     * return `true` if the similarity score is below the similarity threshold, indicating the same user. Otherwise, returns `false`.
+     * @param similarity The similarity score between the two face feature vectors.
+     * @param similarityThreshold The threshold value for considering two vectors as the same user.
+     * Default value is 0.4.
+     * @return `true` if the similarity score is below the similarity threshold, indicating the same user. Otherwise, returns `false`.
+     */
     fun isSameUser(similarity: Double, similarityThreshold: Double = 0.4): Boolean {
-        if (similarity < similarityThreshold) return true
-        else return false
+        return similarity < similarityThreshold
     }
 
+    /**
+     * Abstract function that defines the action to perform when face extraction is successful.
+     * You must implement this function in order to use the library.
+     * @param vector Face feature vector extracted by `getFaceVector()` function
+     * @see getFaceVector
+     * @see startCamera
+     */
     abstract fun reachSeletedCount(vector: DoubleArray)
 
 }

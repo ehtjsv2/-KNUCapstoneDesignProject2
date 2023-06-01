@@ -1,12 +1,2 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-ninja: Entering directory `D:\test\-KNUCapstoneDesignProject2\TestApp\sdk\.cxx\Debug\yz4b4u4z\x86_64'
-=======
-ninja: Entering directory `C:\Users\user\Desktop\AndroidAppProgramming\-KNUCapstoneDesignProject2\TestApp\sdk\.cxx\Debug\yz4b4u4z\x86_64'
->>>>>>> DB
-[1/2] Building CXX object CMakeFiles/opencv_jni_shared.dir/dummy.cpp.o
-[2/2] Linking CXX static library libopencv_jni_shared.a
-=======
 ninja: Entering directory `D:\KNUCapstoneDesignProject2\TestApp\sdk\.cxx\Debug\yz4b4u4z\x86_64'
 ninja: no work to do.
->>>>>>> module
