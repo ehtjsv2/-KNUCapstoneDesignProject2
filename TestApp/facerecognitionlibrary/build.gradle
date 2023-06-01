@@ -3,7 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.chaquo.python'
     id("org.jetbrains.dokka") version "1.8.10"
-    id 'maven-publish'
 }
 
 android {
@@ -63,16 +62,4 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-}
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.java
-                groupId = 'com.example.facerecognitionlibrary' 	// 라이브러리의 그룹 이름
-                artifactId = project.name			// 라이브러리 이름
-                version = '0.0.2'					// 버전
-            }
-        }
-    }
 }

@@ -107,16 +107,9 @@ class MainActivity : AppCompatActivity() {
         generalOrderButton.isEnabled = false
         simpleOrderButton.isEnabled = false
 
-<<<<<<< HEAD
-        binding.userListBtn.setOnClickListener {
-            val intent = Intent(this@MainActivity,user_list_activity::class.java)
-            startActivity(intent)
-        }
-        class FaceRecognitionLibrary2 : FaceRecognitionLibrary(this,this,5){
-=======
+
 
         class FaceRecognitionLibrary2 : FaceRecognitionLibrary(this, this, 5) {
->>>>>>> origin/module
             override fun reachSeletedCount(vector: DoubleArray) {
                 Log.d("myLog", "count가 임계값에 도달했음. vector는 얼굴벡터를 담고있음")
                 // 벡터 비교 수행
