@@ -3,11 +3,7 @@ package com.example.facerecognitionlibrary
 import android.content.Context
 import android.graphics.*
 import android.util.Log
-import android.view.FocusFinder
-import android.view.SurfaceView
-import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.core.Preview.SurfaceProvider
@@ -16,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
+import kotlinx.coroutines.CoroutineScope
 import org.opencv.android.OpenCVLoader
 import org.opencv.android.Utils
 import org.opencv.core.Core
@@ -28,7 +25,11 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
-abstract class FaceRecognitionLibrary(private val context: Context, private val activity: AppCompatActivity,private val threshold: Int = 10) {
+abstract class FaceRecognitionLibrary(
+    private val context: Context,
+    private val activity: AppCompatActivity,
+    private val threshold: Int = 10
+) {
     private var count = 0
     private var enable = false
     private lateinit var byteArr: ByteArray
@@ -43,7 +44,7 @@ abstract class FaceRecognitionLibrary(private val context: Context, private val 
         return stream.toByteArray()
     }
 
-    fun getFaceVector(context: Context, byteArr: ByteArray): DoubleArray {
+    fun getFaceVector(context: Context, byteArr: ByteArray): DoubleArray? {
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(context))
             Log.d("mylog", "Python start success")
@@ -62,7 +63,7 @@ abstract class FaceRecognitionLibrary(private val context: Context, private val 
 
 //        val byteArray: ByteArray = bitmapToByteArray(image)
 
-        return obj.toJava(DoubleArray::class.java)
+        return obj?.toJava(DoubleArray::class.java)
     }
 
     fun getFaceDistance(vector1: DoubleArray, vector2: DoubleArray): Double {
@@ -87,7 +88,11 @@ abstract class FaceRecognitionLibrary(private val context: Context, private val 
         getFaceVector(context, byteArr)
     }
 
-    fun startCamera(context: Context, activity: AppCompatActivity,surfaceProvider: SurfaceProvider ,messageView: TextView) {
+    fun startCamera(
+        context: Context, activity: AppCompatActivity,
+        surfaceProvider: SurfaceProvider,
+        messageView: TextView
+    ) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
 
         class MyImageAnalyzer : ImageAnalysis.Analyzer {
@@ -227,7 +232,9 @@ abstract class FaceRecognitionLibrary(private val context: Context, private val 
                         val new_vector = getFaceVector(context, byteArr)
 //                        Log.d("myLog", "벡터를 생성했습니다.")
 
-                        reachSeletedCount(new_vector)
+                        if (new_vector != null) {
+                            reachSeletedCount(new_vector)
+                        }
 
 
                     }
@@ -274,10 +281,12 @@ abstract class FaceRecognitionLibrary(private val context: Context, private val 
 
         }, ContextCompat.getMainExecutor(context))
     }
-    fun isSameUser(similarity : Double, similarityThreshold:Double=0.4):Boolean{
-        if(similarity<similarityThreshold)return true
+
+    fun isSameUser(similarity: Double, similarityThreshold: Double = 0.4): Boolean {
+        if (similarity < similarityThreshold) return true
         else return false
     }
-    abstract fun reachSeletedCount(vector : DoubleArray)
+
+    abstract fun reachSeletedCount(vector: DoubleArray)
 
 }

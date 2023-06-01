@@ -67,24 +67,11 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            // Creates a Maven publication called "release".
             release(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.release
-
-                // You can then customize attributes of the publication as shown below.
-                groupId = 'com.github.ehtjsv2'
-                artifactId = 'facerecognitionlibrary'
-                version = '0.0.1'
-            }
-            // Creates a Maven publication called “debug”.
-            debug(MavenPublication) {
-                // Applies the component for the debug build variant.
-                from components.debug
-
-                groupId = 'com.github.ehtjsv2'
-                artifactId = 'facerecognitionlibrary'
-                version = '0.0.1'
+                from components.java
+                groupId = 'com.example.facerecognitionlibrary' 	// 라이브러리의 그룹 이름
+                artifactId = project.name			// 라이브러리 이름
+                version = '0.0.2'					// 버전
             }
         }
     }
