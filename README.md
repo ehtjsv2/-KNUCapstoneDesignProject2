@@ -1,4 +1,4 @@
 # -KNUCapstoneDesignProject2
-## ㄹㅇㅁㄴㄹ
+## ㄹㅇㅁㄴㄹㄱ아ㅓㄴ아니라
 
 * 가나다라
