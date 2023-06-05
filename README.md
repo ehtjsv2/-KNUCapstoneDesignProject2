@@ -4,6 +4,6 @@
 * 팀원 : 김도선, 김동현, 이도훈, 양우진
 
 * 결과물 
-  * [모듈 배포용 깃허브](https://github.com/ehtjsv2/KFaceRecognition/tree/main#creators)
+  * [모듈 배포용 깃허브](https://github.com/ehtjsv2/KFaceRecognition)
   * [결과영상]()
 
