@@ -5,5 +5,5 @@
 
 * 결과물 
   * [모듈 배포용 깃허브](https://github.com/ehtjsv2/KFaceRecognition)
-  * [결과영상]()
+  * [결과영상](https://youtu.be/HFgAIw-A5aI)
 
